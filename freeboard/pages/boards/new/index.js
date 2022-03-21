@@ -1,12 +1,14 @@
+import {useRouter} from 'next/router'
 import{useState} from "react"
 import styled from '@emotion/styled'
 import {useMutation ,gql}from '@apollo/client'
 
 
+
   const BackGround = styled.div`
     box-shadow: 0px 4px 20px;
     width: 1200px;
-    height: 1847px;
+    padding: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -259,6 +261,7 @@ import {useMutation ,gql}from '@apollo/client'
 
 
     const[createBoard]=useMutation(CREATE_BOARD)
+    const router =useRouter()
 
     const onChangeName = (event) => {
       setName(event.target.value);
@@ -294,16 +297,10 @@ import {useMutation ,gql}from '@apollo/client'
       }
     };
 
-    const PutOk = async () => {
-      const result = await createBoard({
-        variables : {createBoardInput: {writer: name, password: pass ,title: title ,contents: text}}
-      });
-      console.log(result.data.createBoard._id);
-
+    const PutOk = async () => {    
       if (name === "") {
         setNameErr("이름을 입력하세요");
       }
-
       if (pass === "") {
         setPassErr("비밀번호를 입력하세요.");
       }
@@ -318,17 +315,26 @@ import {useMutation ,gql}from '@apollo/client'
       if (address === "") {
         setAddressErr("주소를 입력하세요.");
       }
-
       if (
         name !== "" &&
         pass !== "" &&
         title !== "" &&
         text !== "" &&
         address !== ""
-      ) {
-        alert("회원가입을 축하합니다.");
+      )  { try {
+        const result = await createBoard({
+          variables : {createBoardInput: {writer: name, password: pass ,title: title ,contents: text}}
+        })
+        console.log(result.data.createBoard._id);
+        alert("게시물등록완료")
+        router.push(`/boards/${result.data.createBoard._id}`)
+
+
+
+      } catch (error) {
+        console.log(error,message)
       }
-    };
+    }}
 
     return (
       //    여기는 HTML쓰는곳

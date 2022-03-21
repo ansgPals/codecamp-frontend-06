@@ -1,6 +1,8 @@
 // import axios from 'axios'
+
 import{useState} from "react"
 import {useMutation,gql} from '@apollo/client'
+
 
 const CRATE_BOARD = gql`
         mutation createBoard($writer: String, $title: String, $contents: String){

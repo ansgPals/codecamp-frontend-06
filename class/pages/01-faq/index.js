@@ -1,13 +1,5 @@
 import styled from '@emotion/styled'
 
-
-
-
-
-export default function AAAPage() {
-
-    // 여기는 자바스크립트 쓰는곳
-
   
     const MyBack = styled.div`
         width : 640px;
@@ -39,7 +31,6 @@ export default function AAAPage() {
         background-image: url('/test/lens.png');
         width: 32px;
         height: 32px;
-
     `
    
 
@@ -215,6 +206,10 @@ export default function AAAPage() {
     const MyfootT2 = styled.div`
     font-size: 16px;
     color: #adadad;
+
+
+
+    
     padding-left: 10px;
 
     `
@@ -233,6 +228,14 @@ export default function AAAPage() {
     
 
 
+
+
+
+
+
+export default function AAAPage() {
+
+    // 여기는 자바스크립트 쓰는곳
 
 
 
