@@ -57,6 +57,10 @@ export const PassWordInput = styled.input`
   color: #828282;
   border: #bdbdbd 1px solid;
 `;
+export const Star = styled.div`
+  margin-left: 15px;
+  line-height: 52px;
+`;
 
 export const CommentContents = styled.div`
   display: flex;
@@ -66,7 +70,7 @@ export const CommentContents = styled.div`
 `;
 export const CommentInPut = styled.textarea`
   border: none;
-  width: 1200px;
+  width: 1190px;
   min-height: 120px;
   padding: 10px;
   font-size: 16px;
@@ -146,8 +150,9 @@ export const CommentButton = styled.div`
 `;
 export const EditButton = styled.button`
   margin-right: 15px;
-  background-image: url("/freeboard/프로필.png");
+  background-image: url("/freeboard/연필.png");
   background-size: cover;
+  background-color: white;
   width: 18px;
   height: 18px;
   border: none;
@@ -155,14 +160,36 @@ export const EditButton = styled.button`
 `;
 export const DeleteButton = styled.button`
   margin-right: 15px;
-  background-image: url("/freeboard/프로필.png");
+  background-image: url("/freeboard/엑스.png");
   background-size: cover;
+  background-color: white;
   width: 18px;
   height: 18px;
   border: none;
   cursor: pointer;
 `;
-
+export const DeleteButton2 = styled.button`
+  margin-right: 15px;
+  background-image: url("/freeboard/엑스.png");
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  margin-left: 1050px;
+  background-color: white;
+`;
+export const NameStar = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30px;
+`;
+export const ListStar = styled.div`
+  margin-left: 20px;
+  line-height: 16px;
+`;
 export const ListName = styled.div`
   margin-bottom: 5px;
   font-size: 16px;

@@ -24,12 +24,12 @@ export default function NewBoard(props: INewBoardConProps) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [address, setAddress] = useState("");
+  const [youTube, setYouTube] = useState("");
 
   const [nameErr, setNameErr] = useState("");
   const [passErr, setPassErr] = useState("");
   const [titleErr, setTitleErr] = useState("");
   const [textErr, setTextErr] = useState("");
-  const [addressErr, setAddressErr] = useState("");
 
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -45,11 +45,7 @@ export default function NewBoard(props: INewBoardConProps) {
     setName(event.target.value);
     if (
       (props.isEdit === true && pass !== "") ||
-      (event.target.value !== "" &&
-        pass !== "" &&
-        title !== "" &&
-        text !== "" &&
-        address !== "")
+      (event.target.value !== "" && pass !== "" && title !== "" && text !== "")
     ) {
       setIsActive(true);
     } else {
@@ -63,11 +59,7 @@ export default function NewBoard(props: INewBoardConProps) {
     setPass(event.target.value);
     if (
       (props.isEdit === true && event.target.value !== "") ||
-      (name !== "" &&
-        event.target.value !== "" &&
-        title !== "" &&
-        text !== "" &&
-        address !== "")
+      (name !== "" && event.target.value !== "" && title !== "" && text !== "")
     ) {
       setIsActive(true);
     } else {
@@ -82,11 +74,7 @@ export default function NewBoard(props: INewBoardConProps) {
     setTitle(event.target.value);
     if (
       (props.isEdit === true && pass !== "") ||
-      (name !== "" &&
-        pass !== "" &&
-        event.target.value !== "" &&
-        text !== "" &&
-        address !== "")
+      (name !== "" && pass !== "" && event.target.value !== "" && text !== "")
     ) {
       setIsActive(true);
     } else {
@@ -101,11 +89,7 @@ export default function NewBoard(props: INewBoardConProps) {
     setText(event.target.value);
     if (
       (props.isEdit === true && pass !== "") ||
-      (name !== "" &&
-        pass !== "" &&
-        title !== "" &&
-        event.target.value !== "" &&
-        address !== "")
+      (name !== "" && pass !== "" && title !== "" && event.target.value !== "")
     ) {
       setIsActive(true);
     } else {
@@ -118,21 +102,10 @@ export default function NewBoard(props: INewBoardConProps) {
 
   const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
-    if (
-      (props.isEdit === true && pass !== "") ||
-      (name !== "" &&
-        pass !== "" &&
-        title !== "" &&
-        text !== "" &&
-        event.target.value !== "")
-    ) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-    if (event.target.value !== "") {
-      setAddressErr("");
-    }
+  };
+
+  const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
+    setYouTube(event.target.value);
   };
 
   const PutOk = async () => {
@@ -150,16 +123,7 @@ export default function NewBoard(props: INewBoardConProps) {
       setTextErr("내용을 입력하세요.");
     }
 
-    if (address === "") {
-      setAddressErr("주소를 입력하세요.");
-    }
-    if (
-      name !== "" &&
-      pass !== "" &&
-      title !== "" &&
-      text !== "" &&
-      address !== ""
-    ) {
+    if (name !== "" && pass !== "" && title !== "" && text !== "") {
       try {
         const result = await createBoard({
           variables: {
@@ -168,12 +132,13 @@ export default function NewBoard(props: INewBoardConProps) {
               password: pass,
               title: title,
               contents: text,
+              youtubeUrl: youTube,
             },
           },
         });
         console.log(result.data?.createBoard._id);
         alert("게시물등록완료");
-        let IDpass = result.data?.createBoard._id;
+        // let IDpass = result.data?.createBoard._id;
         router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error: any) {
         console.log(error.message);
@@ -199,8 +164,9 @@ export default function NewBoard(props: INewBoardConProps) {
       password: pass,
       updateBoardInput: myUpdateBoardInput,
     };
-    if (title !== "") myUpdateBoardInput.title = title;
-    if (text !== "") myUpdateBoardInput.contents = text;
+    if (title) myUpdateBoardInput.title = title;
+    if (text) myUpdateBoardInput.contents = text;
+    if (youTube !== "") myUpdateBoardInput.youtubeUrl = youTube;
 
     // if(title !=="") myVariables.updateBoardInput.title = title
     // if(text !=="") myVariables.updateBoardInput.contents = text
@@ -234,12 +200,12 @@ export default function NewBoard(props: INewBoardConProps) {
       onChangeText={onChangeText}
       textErr={textErr}
       onChangeAddress={onChangeAddress}
-      addressErr={addressErr}
       PutOk={PutOk}
       isActive={isActive}
       isEdit={props.isEdit}
       EditOk={EditOk}
       data={props.data}
+      onChangeYoutube={onChangeYoutube}
     />
   );
 }

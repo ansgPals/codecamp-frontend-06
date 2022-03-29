@@ -1,19 +1,18 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
   CREATE_BOARD_COMMENT,
-  DELETE_BOARD_COMMENT,
+  // DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
   UPDATE_BOARD_COMMENT,
 } from "./boardComment.queries";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import BoardCommentUI from "./boardComment.presenter";
 import { useRouter } from "next/router";
+import { IMyUpDate, IMyVariables } from "./boardComment.types";
 import {
   IQuery,
   IQueryFetchBoardCommentsArgs,
 } from "../../../../commons/types/generated/types";
-import { Refresh } from "@mui/icons-material";
-import { IMyUpDate, IMyVariables } from "./boardComment.types";
 
 export default function BoardComment() {
   const [isEdit, setIsEdit] = useState(false);
@@ -24,10 +23,18 @@ export default function BoardComment() {
   const [contents, setContents] = useState("");
   const [editPass, setEditPass] = useState("");
   const [editContents, setEditContents] = useState("");
-
+  const [value, setValue] = useState(3);
+  const [editValue, setEditValue] = useState(3);
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-  const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+  // const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
   const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
+
+  const handleChange = (value: number) => {
+    setValue(value);
+  };
+  const editHandleChange = (value: number) => {
+    setEditValue(value);
+  };
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
@@ -66,7 +73,7 @@ export default function BoardComment() {
               writer: writer,
               password: pass,
               contents: contents,
-              rating: 5,
+              rating: value,
             },
             boardId: String(router.query.boardId),
           },
@@ -79,6 +86,7 @@ export default function BoardComment() {
         });
         console.log(result.data?.createBoardComment._id);
         alert("댓글이 등록되었습니다.");
+        setWriter(""), setPass(""), setContents("");
       } catch (error: any) {
         console.log(error.message);
       }
@@ -90,6 +98,9 @@ export default function BoardComment() {
     if (isEdit === true) setIsEdit(false);
     setCommentId((event.target as HTMLButtonElement).id);
     console.log(commentId);
+  };
+  const CloseEdit = () => {
+    setIsEdit(false);
   };
 
   const UpDateComment = async () => {
@@ -110,6 +121,7 @@ export default function BoardComment() {
     };
 
     if (contents !== "") MyUpdateInput.contents = editContents;
+    if (!editValue) MyUpdateInput.rating = editValue;
 
     try {
       await updateBoardComment({
@@ -123,17 +135,17 @@ export default function BoardComment() {
     }
   };
 
-  const DeleteComment = (event: MouseEvent<HTMLButtonElement>) => {
-    deleteBoardComment({
-      variables: { boardCommentId: (event.target as HTMLButtonElement).id },
-      refetchQueries: [
-        {
-          query: FETCH_BOARD_COMMENTS,
-          variables: { boardId: String(router.query.boardId) },
-        },
-      ],
-    });
-  };
+  // const DeleteComment = (event: MouseEvent<HTMLButtonElement>) => {
+  //   deleteBoardComment({
+  //     variables: { boardCommentId: (event.target as HTMLButtonElement).id },
+  //     refetchQueries: [
+  //       {
+  //         query: FETCH_BOARD_COMMENTS,
+  //         variables: { boardId: String(router.query.boardId) },
+  //       },
+  //     ],
+  //   });
+  // };
 
   console.log(isEdit);
   return (
@@ -143,13 +155,22 @@ export default function BoardComment() {
       onChangeContents={onChangeContents}
       ClickOKButton={ClickOKButton}
       data={data}
-      DeleteComment={DeleteComment}
+      // DeleteComment={DeleteComment}
       editCommentIcon={editCommentIcon}
       isEdit={isEdit}
       UpDateComment={UpDateComment}
       onChangeEditPassWord={onChangeEditPassWord}
       onChangeEditContents={onChangeEditContents}
       commentId={commentId}
+      writer={writer}
+      pass={pass}
+      contents={contents}
+      handleChange={handleChange}
+      value={value}
+      editHandleChange={editHandleChange}
+      editValue={editValue}
+      CloseEdit={CloseEdit}
+      editContents={editContents}
     />
   );
 }

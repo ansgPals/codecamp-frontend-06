@@ -39,16 +39,16 @@ export const UPDATE_BOARD_COMMENT = gql`
       boardCommentId: $boardCommentId
     ) {
       _id
-      contents
-      rating
-      createdAt
-      updatedAt
+      # contents
+      # rating
+      # createdAt
+      # updatedAt
     }
   }
 `;
 
-export const DELETE_BOARD_COMMENT = gql`
-  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
-    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
-  }
-`;
+// export const DELETE_BOARD_COMMENT = gql`
+//   mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
+//     deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
+//   }
+// `;

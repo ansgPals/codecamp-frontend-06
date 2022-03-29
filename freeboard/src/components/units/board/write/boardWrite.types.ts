@@ -17,10 +17,10 @@ export interface INewBoardUIProps {
   onChangeText: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   textErr: string;
   onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
-  addressErr: string;
   EditOk: () => void;
   PutOk: () => void;
   isActive: boolean;
+  onChangeYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 //컨테이너
 export interface INewBoardConProps {
@@ -30,6 +30,7 @@ export interface INewBoardConProps {
 export interface IUpDateBoardInput {
   title?: string;
   contents?: string;
+  youtubeUrl?: string;
 }
 
 export interface IMyVariables {

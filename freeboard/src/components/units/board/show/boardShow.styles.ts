@@ -134,6 +134,7 @@ export const GoodBox = styled.button`
   width: 30px;
   height: 30px;
   background-image: url("/freeboard/오오.png");
+  color: orange;
   border: 0ch;
   background-color: white;
   background-size: cover;
@@ -141,7 +142,7 @@ export const GoodBox = styled.button`
 `;
 export const LikeNumber = styled.div`
   font-size: 18px;
-  color: yellow;
+  color: orange;
 `;
 
 export const UnLikeBox = styled.div`

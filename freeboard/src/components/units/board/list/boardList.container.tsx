@@ -15,6 +15,7 @@ export default function BoardList() {
   );
 
   const router = useRouter();
+  console.log(router);
 
   const onClickGoBoard = (event: MouseEvent<HTMLButtonElement>) => {
     if (event.target instanceof Element)

@@ -6,6 +6,8 @@ export interface IBoardRoadUIProps {
   OnClickList: () => void;
   OnClickEdit: () => void;
   OnClickDelete: () => void;
+  LikeButton: () => void;
+  DisLikeButton: () => void;
 }
 //컨테이너
 export interface INewBoardConProps {
