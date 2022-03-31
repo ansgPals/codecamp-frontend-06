@@ -9,7 +9,6 @@ import {
   INewBoardConProps,
   IUpDateBoardInput,
 } from "./boardWrite.types";
-import { Content } from "antd/lib/layout/layout";
 import {
   IMutation,
   IMutationCreateBoardArgs,
@@ -23,13 +22,31 @@ export default function NewBoard(props: INewBoardConProps) {
   const [pass, setPass] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [addressCode, setAddressCode] = useState("");
   const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
   const [youTube, setYouTube] = useState("");
 
   const [nameErr, setNameErr] = useState("");
   const [passErr, setPassErr] = useState("");
   const [titleErr, setTitleErr] = useState("");
   const [textErr, setTextErr] = useState("");
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const onClickPostNumber = () => {
+    setModalOpen((prev) => !prev);
+  };
+
+  const onModalOpen = () => {
+    setModalOpen((prev) => !prev);
+  };
+
+  const clickPostNumber = (data: any) => {
+    console.log(data);
+    setAddressCode(data.zonecode);
+    setAddress(data.address);
+    onModalOpen();
+  };
 
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -100,8 +117,14 @@ export default function NewBoard(props: INewBoardConProps) {
     }
   };
 
+  const onChangeAddressCode = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressCode(event.target.value);
+  };
   const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
+  };
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
   };
 
   const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
@@ -133,6 +156,11 @@ export default function NewBoard(props: INewBoardConProps) {
               title: title,
               contents: text,
               youtubeUrl: youTube,
+              boardAddress: {
+                zipcode: String(addressCode),
+                address: String(address),
+                addressDetail: String(addressDetail),
+              },
             },
           },
         });
@@ -167,6 +195,14 @@ export default function NewBoard(props: INewBoardConProps) {
     if (title) myUpdateBoardInput.title = title;
     if (text) myUpdateBoardInput.contents = text;
     if (youTube !== "") myUpdateBoardInput.youtubeUrl = youTube;
+
+    if (address || addressCode || addressDetail) {
+      myUpdateBoardInput.boardAddress = {};
+      if (addressCode) myUpdateBoardInput.boardAddress.zipcode = addressCode;
+      if (address) myUpdateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        myUpdateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
 
     // if(title !=="") myVariables.updateBoardInput.title = title
     // if(text !=="") myVariables.updateBoardInput.contents = text
@@ -206,6 +242,14 @@ export default function NewBoard(props: INewBoardConProps) {
       EditOk={EditOk}
       data={props.data}
       onChangeYoutube={onChangeYoutube}
+      onClickPostNumber={onClickPostNumber}
+      onModalOpen={onModalOpen}
+      modalOpen={modalOpen}
+      clickPostNumber={clickPostNumber}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onChangeAddressCode={onChangeAddressCode}
+      addressCode={addressCode}
+      address={address}
     />
   );
 }

@@ -2,6 +2,7 @@ import { getDate } from "../libraries/util";
 import * as MY from "./boardComment.styles";
 import { IBoardCommentUIProps } from "./boardComment.types";
 import { Rate } from "antd";
+import { Modal } from "antd";
 
 export default function BoardCommentUI(props: IBoardCommentUIProps) {
   return (
@@ -27,7 +28,7 @@ export default function BoardCommentUI(props: IBoardCommentUIProps) {
               value={props.pass}
             ></MY.PassWordInput>
             <MY.Star>
-              <Rate onChange={props.handleChange} value={props.value} />
+              <Rate onChange={props.StarChange} value={props.value} />
             </MY.Star>
           </MY.CommentTopBox>
           <MY.CommentContents>
@@ -63,7 +64,7 @@ export default function BoardCommentUI(props: IBoardCommentUIProps) {
               onChange={props.onChangeEditPassWord}
             ></MY.PassWordInput>
             <MY.Star>
-              <Rate onChange={props.editHandleChange} value={props.editValue} />
+              <Rate onChange={props.editStarChange} value={props.editValue} />
             </MY.Star>
           </MY.CommentTopBox>
           <MY.CommentContents>
@@ -99,9 +100,23 @@ export default function BoardCommentUI(props: IBoardCommentUIProps) {
                     onClick={props.editCommentIcon}
                   ></MY.EditButton>
                   <MY.DeleteButton
-                    // onClick={props.DeleteComment}
+                    onClick={props.DeletePassWord}
                     id={el._id}
                   ></MY.DeleteButton>
+                  {props.deleteOpen && (
+                    <Modal
+                      visible={true}
+                      onOk={props.DeleteComment}
+                      onCancel={props.DeleteModal}
+                    >
+                      <div>댓글을 삭제하시려면 비밀번호를 입력하세요.</div>
+                      <input
+                        type="password"
+                        placeholder="비밀번호"
+                        onChange={props.onChangeDeletePass}
+                      ></input>
+                    </Modal>
+                  )}
                 </MY.CommentButton>
               </MY.ListProfile>
               <MY.ListDate>{getDate(el.createdAt)}</MY.ListDate>

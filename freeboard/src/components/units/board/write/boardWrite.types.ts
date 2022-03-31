@@ -21,6 +21,14 @@ export interface INewBoardUIProps {
   PutOk: () => void;
   isActive: boolean;
   onChangeYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClickPostNumber: () => void;
+  onModalOpen: () => void;
+  modalOpen: boolean;
+  clickPostNumber: (data: any) => void;
+  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAddressCode: (event: ChangeEvent<HTMLInputElement>) => void;
+  addressCode: string;
+  address: string;
 }
 //컨테이너
 export interface INewBoardConProps {
@@ -31,6 +39,7 @@ export interface IUpDateBoardInput {
   title?: string;
   contents?: string;
   youtubeUrl?: string;
+  boardAddress?: { addressDetail?: string; address?: string; zipcode?: string };
 }
 
 export interface IMyVariables {

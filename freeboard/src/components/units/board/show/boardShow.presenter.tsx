@@ -2,6 +2,7 @@ import * as MyStyle from "./boardShow.styles";
 import { getDate } from "../../board/libraries/util";
 import { IBoardRoadUIProps } from "./boardShow.types";
 import ReactPlayer from "react-player";
+import { Tooltip } from "antd";
 
 export default function BoardRoadUI(props: IBoardRoadUIProps) {
   return (
@@ -19,7 +20,13 @@ export default function BoardRoadUI(props: IBoardRoadUIProps) {
               </MyStyle.NameDate>
             </MyStyle.TopLeft>
             <MyStyle.TopRight>
-              <MyStyle.YellowItem1></MyStyle.YellowItem1>
+              <Tooltip
+                placement="topRight"
+                title={`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
+              >
+                <MyStyle.YellowItem1 />
+              </Tooltip>
+
               <MyStyle.YellowItem2></MyStyle.YellowItem2>
             </MyStyle.TopRight>
           </MyStyle.TopBack>

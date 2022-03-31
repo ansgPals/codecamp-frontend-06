@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
   CREATE_BOARD_COMMENT,
-  // DELETE_BOARD_COMMENT,
+  DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
   UPDATE_BOARD_COMMENT,
 } from "./boardComment.queries";
@@ -26,13 +26,17 @@ export default function BoardComment() {
   const [value, setValue] = useState(3);
   const [editValue, setEditValue] = useState(3);
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-  // const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+  const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+  const [deleteId, setDeleteId] = useState("");
   const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deletePass, setDeletePass] = useState("");
 
-  const handleChange = (value: number) => {
+  const StarChange = (value: number) => {
     setValue(value);
   };
-  const editHandleChange = (value: number) => {
+
+  const editStarChange = (value: number) => {
     setEditValue(value);
   };
 
@@ -50,6 +54,10 @@ export default function BoardComment() {
   };
   const onChangeEditContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setEditContents(event.target.value);
+  };
+
+  const onChangeDeletePass = (event: ChangeEvent<HTMLInputElement>) => {
+    setDeletePass(event.target.value);
   };
 
   const { data } = useQuery<
@@ -120,7 +128,7 @@ export default function BoardComment() {
       boardCommentId: String(commentId),
     };
 
-    if (contents !== "") MyUpdateInput.contents = editContents;
+    if (editContents !== "") MyUpdateInput.contents = editContents;
     if (!editValue) MyUpdateInput.rating = editValue;
 
     try {
@@ -134,18 +142,33 @@ export default function BoardComment() {
       alert(error);
     }
   };
+  const DeleteModal = () => {
+    setDeleteOpen((prev: any) => !prev);
+  };
 
-  // const DeleteComment = (event: MouseEvent<HTMLButtonElement>) => {
-  //   deleteBoardComment({
-  //     variables: { boardCommentId: (event.target as HTMLButtonElement).id },
-  //     refetchQueries: [
-  //       {
-  //         query: FETCH_BOARD_COMMENTS,
-  //         variables: { boardId: String(router.query.boardId) },
-  //       },
-  //     ],
-  //   });
-  // };
+  const DeletePassWord = (event: MouseEvent<HTMLButtonElement>) => {
+    setDeleteId((event.target as HTMLButtonElement).id);
+    setDeleteOpen((prev: any) => !prev);
+  };
+
+  const DeleteComment = async () => {
+    try {
+      await deleteBoardComment({
+        variables: { boardCommentId: deleteId, password: deletePass },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: String(router.query.boardId) },
+          },
+        ],
+      });
+      alert("댓글이 삭제되었습니다.");
+      DeleteModal();
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
 
   console.log(isEdit);
   return (
@@ -155,7 +178,7 @@ export default function BoardComment() {
       onChangeContents={onChangeContents}
       ClickOKButton={ClickOKButton}
       data={data}
-      // DeleteComment={DeleteComment}
+      DeleteComment={DeleteComment}
       editCommentIcon={editCommentIcon}
       isEdit={isEdit}
       UpDateComment={UpDateComment}
@@ -165,12 +188,16 @@ export default function BoardComment() {
       writer={writer}
       pass={pass}
       contents={contents}
-      handleChange={handleChange}
+      StarChange={StarChange}
       value={value}
-      editHandleChange={editHandleChange}
+      editStarChange={editStarChange}
       editValue={editValue}
       CloseEdit={CloseEdit}
       editContents={editContents}
+      DeletePassWord={DeletePassWord}
+      deleteOpen={deleteOpen}
+      onChangeDeletePass={onChangeDeletePass}
+      DeleteModal={DeleteModal}
     />
   );
 }

@@ -8,7 +8,7 @@ export interface IBoardCommentUIProps {
   onChangePassWord: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   ClickOKButton: () => void;
-  // DeleteComment: (event: MouseEvent<HTMLButtonElement>) => void;
+  DeleteComment: () => void;
   editCommentIcon: (event: MouseEvent<HTMLButtonElement>) => void;
   isEdit: boolean;
   UpDateComment: () => void;
@@ -18,12 +18,16 @@ export interface IBoardCommentUIProps {
   writer: string;
   pass: string;
   contents: string;
-  handleChange: (value: number) => void;
+  StarChange: (value: number) => void;
   value: number;
-  editHandleChange: (value: number) => void;
+  editStarChange: (value: number) => void;
   editValue: number;
   CloseEdit: () => void;
   editContents: string;
+  DeletePassWord: (event: MouseEvent<HTMLButtonElement>) => void;
+  deleteOpen: boolean;
+  onChangeDeletePass: (event: ChangeEvent<HTMLInputElement>) => void;
+  DeleteModal : ()=>
 }
 
 export interface IisEditProps {

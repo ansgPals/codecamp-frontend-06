@@ -1,5 +1,7 @@
 import * as MyStyle from "./boardWrite.styles";
 import { INewBoardUIProps } from "./boardWrite.types";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function NewBoardUI(props: INewBoardUIProps) {
   return (
@@ -53,13 +55,40 @@ export default function NewBoardUI(props: INewBoardUIProps) {
           <MyStyle.AddTop>
             <MyStyle.SurchPut
               placeholder="07250"
-              type="number"
-              onChange={props.onChangeAddress}
+              readOnly
+              value={
+                props.addressCode ||
+                props.data?.fetchBoard.boardAddress.zipcode ||
+                ""
+              }
             ></MyStyle.SurchPut>
-            <MyStyle.SurchPush>우편번호 검색</MyStyle.SurchPush>
+            <MyStyle.SurchPush onClick={props.onClickPostNumber}>
+              우편번호 검색
+            </MyStyle.SurchPush>
+            {props.modalOpen && (
+              <Modal
+                visible={true}
+                onOk={props.onModalOpen}
+                onCancel={props.onModalOpen}
+              >
+                <DaumPostcode onComplete={props.clickPostNumber} />
+              </Modal>
+            )}
           </MyStyle.AddTop>
-          <MyStyle.JustBox></MyStyle.JustBox>
-          <MyStyle.JustBox></MyStyle.JustBox>
+          <MyStyle.JustBox
+            type="text"
+            readOnly
+            value={
+              props.address || props.data?.fetchBoard.boardAddress.address || ""
+            }
+            onChange={props.onChangeAddress}
+          ></MyStyle.JustBox>
+          <MyStyle.JustBox
+            placeholder="상세주소를 적어주세요"
+            type="text"
+            onChange={props.onChangeAddressDetail}
+            defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+          ></MyStyle.JustBox>
         </MyStyle.AddBox>
         <MyStyle.YouTubeBox>
           <MyStyle.MyName>유튜브</MyStyle.MyName>
