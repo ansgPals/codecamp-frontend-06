@@ -18,7 +18,7 @@ const Carousel = styled(Slider)`
   width: 1200px;
 `;
 const CarouselBox = styled.div`
-  font-size: 70px;
+  font-size: 90px;
   text-align: center;
   color: white;
   line-height: 300px;
@@ -38,13 +38,13 @@ export default function LayOutBanner() {
           <h2></h2>
           <Carousel {...settings}>
             <div>
-              <CarouselBox>호롤롤롤로</CarouselBox>
+              <CarouselBox>GRAPHQL</CarouselBox>
             </div>
             <div>
-              <CarouselBox>호롤롤롤로</CarouselBox>
+              <CarouselBox>REACT</CarouselBox>
             </div>
             <div>
-              <CarouselBox>꺄르르르르륵</CarouselBox>
+              <CarouselBox>MUN HYEMIN</CarouselBox>
             </div>
           </Carousel>
         </div>

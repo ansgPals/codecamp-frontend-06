@@ -1,5 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 import styled from "@emotion/styled";
+import { useState } from "react";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {
@@ -20,9 +21,18 @@ const MyCal = styled.div`
 `;
 
 export default function MapBoardPage() {
+  const [startPage, setStartPage] = useState(1);
   const { data, refetch } = useQuery(FETCH_BOARDS);
   const OnclickPage = (event) => {
     refetch({ page: Number(event.target.id) });
+  };
+  const OnClickPrevPage = () => {
+    if (startPage === 1) return;
+    setStartPage((prev) => prev - 10);
+  };
+
+  const OnClickNextPage = () => {
+    setStartPage((prev) => prev + 10);
   };
 
   return (
@@ -33,11 +43,18 @@ export default function MapBoardPage() {
           <MyCal>{el.title}</MyCal>
         </MyRow>
       ))}
+      <span onClick={OnClickPrevPage}>이전페이지</span>
       {new Array(10).fill(1).map((_, index) => (
-        <span key={index + 1} onClick={OnclickPage} id={String(index + 1)}>
-          {index + 1}
+        <span
+          key={index + startPage}
+          onClick={OnclickPage}
+          id={String(index + startPage)}
+        >
+          {index + startPage}
+          {/* 기준 + index */}
         </span>
       ))}
+      <span onClick={OnClickNextPage}>다음페이지</span>
 
       {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => (
         <span key={el} onClick={OnclickPage} id={String(el)}>
