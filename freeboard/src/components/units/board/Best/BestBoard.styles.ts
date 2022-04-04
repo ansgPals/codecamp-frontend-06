@@ -8,11 +8,18 @@ export const BackGround = styled.div`
   justify-content: center;
   align-items: center;
   margin: 20px;
+  background-color: #fffafb;
 `;
 
 export const BestTitle = styled.div`
   font-size: 30px;
+  background-color: #ffffff;
   margin-bottom: 30px;
+  border: 6px pink dotted;
+  width: 600px;
+  height: 80px;
+  text-align: center;
+  line-height: 70px;
 `;
 export const Card = styled.div``;
 export const profileBox = styled.div`

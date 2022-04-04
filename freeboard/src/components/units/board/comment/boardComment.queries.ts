@@ -22,6 +22,7 @@ export const FETCH_BOARD_COMMENTS = gql`
       contents
       rating
       createdAt
+      updatedAt
     }
   }
 `;

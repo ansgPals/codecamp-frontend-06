@@ -8,10 +8,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(/freeboard/씨티.jpeg);
-  background-size: cover;
+  background-image: url("/고앵.png");
+  background-size: unset;
   background-repeat: no-repeat;
   background-position: bottom;
+  background-color: #f1a3b6;
+  border-radius: 200px;
 `;
 const Carousel = styled(Slider)`
   height: 300px;
@@ -38,10 +40,10 @@ export default function LayOutBanner() {
           <h2></h2>
           <Carousel {...settings}>
             <div>
-              <CarouselBox>GRAPHQL</CarouselBox>
+              <CarouselBox>집사</CarouselBox>
             </div>
             <div>
-              <CarouselBox>REACT</CarouselBox>
+              <CarouselBox>캔따개</CarouselBox>
             </div>
             <div>
               <CarouselBox>MUN HYEMIN</CarouselBox>

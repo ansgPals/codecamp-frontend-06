@@ -4,6 +4,7 @@ import LayOutHeader from "./header/inde";
 import LayOutNavigation from "./navigation/inde";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
+import { useRouter } from "next/router";
 
 const Body = styled.div`
   height: fit-content;
@@ -14,15 +15,23 @@ const Body = styled.div`
   align-items: center;
 `;
 
+const HIDDEN_PAGE = ["/"];
+
 interface ILayoutProps {
   children: ReactNode;
 }
 export default function LayOut(props: ILayoutProps) {
+  const router = useRouter();
+  const isHidden = HIDDEN_PAGE.includes(router.asPath);
   return (
     <>
-      <LayOutHeader />
-      <LayOutBanner />
-      <LayOutNavigation />
+      {!isHidden && (
+        <div>
+          <LayOutHeader />
+          <LayOutBanner />
+          <LayOutNavigation />
+        </div>
+      )}{" "}
       <Body>{props.children}</Body>
       <LayOutFooter />
     </>

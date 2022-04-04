@@ -75,15 +75,16 @@ export default function BoardComment() {
   };
   const CommentScrolling = () => {
     if (!data) return;
+    console.log(data);
     fetchMore({
       variables: {
         page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.fetchBoardComments)
-          return { fetchBoards: [...prev.fetchBoardComments] };
+        if (!fetchMoreResult?.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
         return {
-          fetchBoards: [
+          fetchBoardComments: [
             ...prev.fetchBoardComments,
             ...fetchMoreResult.fetchBoardComments,
           ],
