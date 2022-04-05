@@ -7,47 +7,65 @@ export default function NewBoardUI(props: INewBoardUIProps) {
   return (
     <MyStyle.BackGround>
       <MyStyle.MyTitle>게시물{props.isEdit ? "수정" : "등록"}</MyStyle.MyTitle>
+      <Modal
+        visible={props.okModalOpen}
+        onOk={props.Exit}
+        onCancel={props.onOkModalOpen}
+      >
+        게시물이{props.isEdit ? "수정" : "등록"}되었습니다!
+      </Modal>
+      <Modal
+        visible={props.noEditModal}
+        onOk={props.EditModalOpen}
+        onCancel={props.EditModalOpen}
+      >
+        {props.pass ? "수정한 내용이 없습니다!" : "비밀번호를 입력하세요!"}
+      </Modal>
       <MyStyle.MyBody>
         <MyStyle.BackTop>
           <MyStyle.TopLt>
             <MyStyle.MyName>작성자</MyStyle.MyName>
             <MyStyle.PutName
               placeholder="이름을 입력하세요"
+              id="writer"
               type="text"
               onChange={props.onChangeName}
               defaultValue={props.data?.fetchBoard.writer}
               readOnly={props.data?.fetchBoard.writer ? true : false}
             ></MyStyle.PutName>
-            <MyStyle.MyErr>{props.nameErr}</MyStyle.MyErr>
+            <MyStyle.MyErr>{props.inputsErr.nameErr}</MyStyle.MyErr>
           </MyStyle.TopLt>
           <MyStyle.TopRt>
             <MyStyle.MyName>비밀번호</MyStyle.MyName>
             <MyStyle.PutPass
               type="password"
+              id="password"
               placeholder="비밀번호를 입력해주세요."
               onChange={props.onChangePass}
             ></MyStyle.PutPass>
-            <MyStyle.MyErr>{props.passErr}</MyStyle.MyErr>
+            <MyStyle.MyErr>{props.inputsErr.passErr}</MyStyle.MyErr>
           </MyStyle.TopRt>
         </MyStyle.BackTop>
         <MyStyle.TitleBox>
           <MyStyle.MyName>제목</MyStyle.MyName>
           <MyStyle.PutTitle
             placeholder="제목을 작성해주세요."
+            id="title"
             type="text"
             onChange={props.onChangeTitle}
             defaultValue={props.data?.fetchBoard.title}
           ></MyStyle.PutTitle>
-          <MyStyle.MyErr>{props.titleErr}</MyStyle.MyErr>
+          <MyStyle.MyErr>{props.inputsErr.titleErr}</MyStyle.MyErr>
         </MyStyle.TitleBox>
         <MyStyle.TextBox>
           <MyStyle.MyName>내용</MyStyle.MyName>
           <MyStyle.PutText
             placeholder="내용을 작성해주세요."
+            id="contents"
             onChange={props.onChangeText}
             defaultValue={props.data?.fetchBoard.contents}
           ></MyStyle.PutText>
-          <MyStyle.MyErr>{props.textErr}</MyStyle.MyErr>
+          <MyStyle.MyErr>{props.inputsErr.textErr}</MyStyle.MyErr>
         </MyStyle.TextBox>
         <MyStyle.AddBox>
           <MyStyle.MyName>주소</MyStyle.MyName>
@@ -57,7 +75,7 @@ export default function NewBoardUI(props: INewBoardUIProps) {
               placeholder="07250"
               readOnly
               value={
-                props.addressCode ||
+                props.boardAddress.zipcode ||
                 props.data?.fetchBoard.boardAddress.zipcode ||
                 ""
               }
@@ -79,13 +97,15 @@ export default function NewBoardUI(props: INewBoardUIProps) {
             type="text"
             readOnly
             value={
-              props.address || props.data?.fetchBoard.boardAddress.address || ""
+              props.boardAddress.address ||
+              props.data?.fetchBoard.boardAddress.address ||
+              ""
             }
-            onChange={props.onChangeAddress}
           ></MyStyle.JustBox>
           <MyStyle.JustBox
             placeholder="상세주소를 적어주세요"
             type="text"
+            id="addressDetail"
             onChange={props.onChangeAddressDetail}
             defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
           ></MyStyle.JustBox>
@@ -94,6 +114,7 @@ export default function NewBoardUI(props: INewBoardUIProps) {
           <MyStyle.MyName>유튜브</MyStyle.MyName>
           <MyStyle.CopyYouTube
             placeholder="링크를 복사해주세요."
+            id="youtubeUrl"
             type="text"
             onChange={props.onChangeYoutube}
             defaultValue={props.data?.fetchBoard.youtubeUrl || ""}

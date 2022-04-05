@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   background-size: unset;
   background-repeat: no-repeat;
   background-position: bottom;
-  background-color: #f1a3b6;
+  background-color: #afa9ff;
   border-radius: 200px;
 `;
 const Carousel = styled(Slider)`
@@ -40,10 +40,10 @@ export default function LayOutBanner() {
           <h2></h2>
           <Carousel {...settings}>
             <div>
-              <CarouselBox>집사</CarouselBox>
+              <CarouselBox> I am ZipSA</CarouselBox>
             </div>
             <div>
-              <CarouselBox>캔따개</CarouselBox>
+              <CarouselBox> I am CanOpenner</CarouselBox>
             </div>
             <div>
               <CarouselBox>MUN HYEMIN</CarouselBox>

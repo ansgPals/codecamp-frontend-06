@@ -39,14 +39,14 @@ export default function BoardList() {
   const onClickPrevPage = () => {
     if (startPage === 1) return;
     setStartPage((prev) => prev - 10);
-    refetch({ page: Number(startPage + 10) });
-    setPickPage(pickPage + 10);
+    refetch({ page: Number(startPage - 10) });
+    setPickPage(startPage - 10);
   };
   const onClickNextPage = () => {
     if (startPage + 10 > lastPage) return;
     setStartPage((prev) => prev + 10);
     refetch({ page: Number(startPage + 10) });
-    setPickPage(pickPage - 10);
+    setPickPage(startPage + 10);
   };
 
   return (

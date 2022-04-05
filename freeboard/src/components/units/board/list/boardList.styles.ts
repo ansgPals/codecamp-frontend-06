@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const BackGround = styled.div`
   width: 1920px;
-  padding: 100px;
+  padding: 50px 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,8 +17,8 @@ export const ListBox = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0px;
-  border-top: 2px solid gray;
-  border-bottom: 2px solid gray;
+  border-top: 2px solid pink;
+  border-bottom: 2px solid pink;
 `;
 
 export const Row = styled.div`
@@ -27,7 +27,7 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px gray solid;
+  border-bottom: 1px pink solid;
   align-items: center;
   background-color: transparent;
 `;
@@ -106,14 +106,12 @@ export const PageNumber = styled.button`
 
 export const PagePrevButton = styled.button`
   font-size: 20px;
-
   border: none;
   background-color: white;
   cursor: pointer;
 `;
 export const PageNextButton = styled.button`
   font-size: 20px;
-
   border: none;
   background-color: white;
   cursor: pointer;
@@ -125,10 +123,26 @@ export const WriteBoardButton = styled.button`
   height: 51px;
   font-size: 22ps;
   text-align: center;
-  line-height: 51px;
+  line-height: 45px;
+  background-color: #fff7e3;
+  border-radius: 20px;
+  border: pink 5px solid;
 
   cursor: pointer;
   :hover {
-    background-color: #fff875;
+    background-color: pink;
   }
+`;
+
+export const CatTitle = styled.div`
+  height: 100px;
+  width: 400px;
+  background-color: white;
+  text-align: center;
+  font-size: 30px;
+  line-height: 80px;
+  border-radius: 50px;
+  border: 12px solid pink;
+  margin-bottom: 20px;
+  margin-right: 500px;
 `;

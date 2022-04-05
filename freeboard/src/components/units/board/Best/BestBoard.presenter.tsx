@@ -72,6 +72,12 @@ export default function BestBoardUI(props: IBestBoardUIProps) {
             </M.Card>
           ))}
         </M.BestContents>
+        <M.CatEnglish>
+          <M.EnglishTitle>
+            영어로 고양이에대해 하루한문장씩 알아봐요!!
+          </M.EnglishTitle>
+          <M.Fect>{props.catFect}</M.Fect>
+        </M.CatEnglish>
       </M.BackGround>
     </div>
   );

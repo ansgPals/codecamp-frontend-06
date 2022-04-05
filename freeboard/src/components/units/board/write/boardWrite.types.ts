@@ -9,14 +9,9 @@ export interface INewBoardUIProps {
   isEdit: boolean;
   onChangeName: (event: ChangeEvent<HTMLInputElement>) => void;
   data?: any;
-  nameErr: string;
   onChangePass: (event: ChangeEvent<HTMLInputElement>) => void;
-  passErr: string;
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
-  titleErr: string;
   onChangeText: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  textErr: string;
-  onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
   EditOk: () => void;
   PutOk: () => void;
   isActive: boolean;
@@ -24,11 +19,28 @@ export interface INewBoardUIProps {
   onClickPostNumber: () => void;
   onModalOpen: () => void;
   modalOpen: boolean;
+  onOkModalOpen: () => void;
+  okModalOpen: boolean;
   clickPostNumber: (data: any) => void;
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeAddressCode: (event: ChangeEvent<HTMLInputElement>) => void;
-  addressCode: string;
+  boardAddress: IboardAddress;
+  inputsErr: IinputsErr;
+  Exit: () => void;
+  noEditModal: boolean;
+  EditModalOpen: () => void;
+  pass: string;
+}
+
+export interface IboardAddress {
+  zipcode: string;
   address: string;
+  addressDetail: string;
+}
+export interface IinputsErr {
+  nameErr: string;
+  passErr: string;
+  titleErr: string;
+  textErr: string;
 }
 //컨테이너
 export interface INewBoardConProps {

@@ -7,6 +7,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <div>
       <MY.BackGround>
+        <MY.CatTitle>GOANGSSS 자랑</MY.CatTitle>
         <MY.ListBox>
           <MY.Row>
             <MY.Cal1>번호</MY.Cal1>
@@ -47,7 +48,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
                     id={String(index + props.startPage)}
                     style={
                       props.pickPage === index + props.startPage
-                        ? { color: "red" }
+                        ? { color: "#ff7ace" }
                         : { color: "black" }
                     }
                   >

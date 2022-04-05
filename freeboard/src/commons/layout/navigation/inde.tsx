@@ -14,7 +14,7 @@ const Navi1 = styled.div`
   font-size: 25px;
   margin-left: 70px;
   margin-right: 50px;
-  color: white;
+  color: #37127c;
   cursor: pointer;
   width: 200px;
   height: 50px;
@@ -22,7 +22,7 @@ const Navi1 = styled.div`
   line-height: 50px;
   border-radius: 15px;
   border: 1px solid #f7f7f7;
-  background-color: #fc8099;
+  background-color: #fff7cb;
   font-weight: 600;
 `;
 

@@ -16,35 +16,56 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export default function NewBoard(props: INewBoardConProps) {
-  // 여기는 자바스크립트 쓰는곳!
   const [isActive, setIsActive] = useState(false);
-  const [name, setName] = useState("");
-  const [pass, setPass] = useState("");
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [addressCode, setAddressCode] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
-  const [youTube, setYouTube] = useState("");
+  const [newId, setNewId] = useState<any>("");
 
-  const [nameErr, setNameErr] = useState("");
-  const [passErr, setPassErr] = useState("");
-  const [titleErr, setTitleErr] = useState("");
-  const [textErr, setTextErr] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
 
+  const [inputs, setInputs] = useState({
+    writer: "",
+    password: "",
+    title: "",
+    contents: "",
+  });
+
+  const [inputsErr, setInputsErr] = useState({
+    nameErr: "",
+    passErr: "",
+    titleErr: "",
+    textErr: "",
+  });
+
+  const [boardAddress, setBoardAddress] = useState({
+    zipcode: "",
+    address: "",
+    addressDetail: "",
+  });
+  const [okModalOpen, setOkModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const onClickPostNumber = () => {
-    setModalOpen((prev) => !prev);
+  const [noEditModal, setNoEditModal] = useState(false);
+  const onOkModalOpen = () => {
+    setOkModalOpen((prev) => !prev);
+  };
+  const EditModalOpen = () => {
+    setNoEditModal((prev) => !prev);
   };
 
   const onModalOpen = () => {
     setModalOpen((prev) => !prev);
   };
 
+  const onClickPostNumber = () => {
+    onModalOpen();
+  };
+
   const clickPostNumber = (data: any) => {
     console.log(data);
-    setAddressCode(data.zonecode);
-    setAddress(data.address);
+    setBoardAddress({
+      ...boardAddress,
+      zipcode: data.zonecode,
+      address: data.address,
+    });
+
     onModalOpen();
   };
 
@@ -59,128 +80,144 @@ export default function NewBoard(props: INewBoardConProps) {
   const router = useRouter();
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
     if (
-      (props.isEdit === true && pass !== "") ||
-      (event.target.value !== "" && pass !== "" && title !== "" && text !== "")
+      (props.isEdit === true && inputs.password !== "") ||
+      (event.target.value !== "" &&
+        inputs.password !== "" &&
+        inputs.title !== "" &&
+        inputs.contents !== "")
     ) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
     if (event.target.value !== "") {
-      setNameErr("");
+      setInputsErr({ ...inputsErr, nameErr: "" });
     }
   };
+
+  // Object.values(inputs).forEach((el) => {
+  //   if (el !== "") {
+  //     console.log(true);
+  //   } else {
+  //     console.log(false);
+  //   }
+  // });
+
   const onChangePass = (event: ChangeEvent<HTMLInputElement>) => {
-    setPass(event.target.value);
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
     if (
       (props.isEdit === true && event.target.value !== "") ||
-      (name !== "" && event.target.value !== "" && title !== "" && text !== "")
+      (event.target.value !== "" &&
+        inputs.writer !== "" &&
+        inputs.title !== "" &&
+        inputs.contents !== "")
     ) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
     if (event.target.value !== "") {
-      setPassErr("");
+      setInputsErr({ ...inputsErr, passErr: "" });
     }
   };
 
   const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
     if (
-      (props.isEdit === true && pass !== "") ||
-      (name !== "" && pass !== "" && event.target.value !== "" && text !== "")
+      (props.isEdit === true && inputs.password !== "") ||
+      (event.target.value !== "" &&
+        inputs.password !== "" &&
+        inputs.writer !== "" &&
+        inputs.contents !== "")
     ) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
     if (event.target.value !== "") {
-      setTitleErr("");
+      setInputsErr({ ...inputsErr, titleErr: "" });
     }
   };
 
   const onChangeText = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
     if (
-      (props.isEdit === true && pass !== "") ||
-      (name !== "" && pass !== "" && title !== "" && event.target.value !== "")
+      (props.isEdit === true && inputs.password !== "") ||
+      (event.target.value !== "" &&
+        inputs.password !== "" &&
+        inputs.title !== "" &&
+        inputs.writer !== "")
     ) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
     if (event.target.value !== "") {
-      setTextErr("");
+      setInputsErr({ ...inputsErr, textErr: "" });
     }
   };
 
-  const onChangeAddressCode = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressCode(event.target.value);
-  };
-  const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddress(event.target.value);
-  };
   const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressDetail(event.target.value);
+    setBoardAddress({ ...boardAddress, addressDetail: event.target.value });
   };
 
   const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
-    setYouTube(event.target.value);
+    setYoutubeUrl(event.target.value);
   };
 
   const PutOk = async () => {
-    if (name === "") {
-      setNameErr("이름을 입력하세요");
+    if (inputs.writer === "") {
+      inputsErr.nameErr = "이름을 입력하세요";
+      console.log(inputsErr);
     }
-    if (pass === "") {
-      setPassErr("비밀번호를 입력하세요.");
+    if (inputs.password === "") {
+      inputsErr.passErr = "비밀번호를";
     }
-    if (title === "") {
-      setTitleErr("내용를 입력하세요.");
-    }
-
-    if (text === "") {
-      setTextErr("내용을 입력하세요.");
+    if (inputs.title === "") {
+      inputsErr.titleErr = "제목을 입력하세요";
     }
 
-    if (name !== "" && pass !== "" && title !== "" && text !== "") {
+    if (inputs.contents === "") {
+      setInputsErr({ ...inputsErr, textErr: "내용을 입력하세요" });
+    }
+
+    if (
+      inputs.contents !== "" &&
+      inputs.password !== "" &&
+      inputs.title !== "" &&
+      inputs.writer !== ""
+    ) {
       try {
         const result = await createBoard({
           variables: {
             createBoardInput: {
-              writer: name,
-              password: pass,
-              title: title,
-              contents: text,
-              youtubeUrl: youTube,
-              boardAddress: {
-                zipcode: String(addressCode),
-                address: String(address),
-                addressDetail: String(addressDetail),
-              },
+              ...inputs,
+              youtubeUrl: youtubeUrl,
+              boardAddress: { ...boardAddress },
             },
           },
         });
         console.log(result.data?.createBoard._id);
-        alert("게시물등록완료");
-        // let IDpass = result.data?.createBoard._id;
-        router.push(`/boards/${result.data?.createBoard._id}`);
+        setNewId(result.data?.createBoard._id);
+        onOkModalOpen();
       } catch (error: any) {
         console.log(error.message);
       }
     }
   };
+  const Exit = () => {
+    router.push(`/boards/${newId}`);
+  };
 
   const EditOk = async () => {
-    if (!title && !text) {
-      alert("수정한 내용이없습니다.");
+    if (!inputs.writer && !inputs.contents) {
+      EditModalOpen();
       return;
     }
-    if (pass === "") {
-      setPassErr("비밀번호를 입력하세요.");
+    if (inputs.password === "") {
+      setInputsErr({ ...inputsErr, passErr: "비밀번호를 입력하세요" });
       alert("비밀번호를 입력하세요.");
       return;
     }
@@ -189,53 +226,47 @@ export default function NewBoard(props: INewBoardConProps) {
 
     const myVariables: IMyVariables = {
       boardId: router.query.boardId,
-      password: pass,
+      password: inputs.password,
       updateBoardInput: myUpdateBoardInput,
     };
-    if (title) myUpdateBoardInput.title = title;
-    if (text) myUpdateBoardInput.contents = text;
-    if (youTube !== "") myUpdateBoardInput.youtubeUrl = youTube;
+    if (inputs.title) myUpdateBoardInput.title = inputs.title;
+    if (inputs.contents) myUpdateBoardInput.contents = inputs.contents;
+    if (youtubeUrl !== "") myUpdateBoardInput.youtubeUrl = youtubeUrl;
 
-    if (address || addressCode || addressDetail) {
+    if (
+      boardAddress.address ||
+      boardAddress.zipcode ||
+      boardAddress.addressDetail
+    ) {
       myUpdateBoardInput.boardAddress = {};
-      if (addressCode) myUpdateBoardInput.boardAddress.zipcode = addressCode;
-      if (address) myUpdateBoardInput.boardAddress.address = address;
-      if (addressDetail)
-        myUpdateBoardInput.boardAddress.addressDetail = addressDetail;
+      if (boardAddress.zipcode)
+        myUpdateBoardInput.boardAddress.zipcode = boardAddress.zipcode;
+      if (boardAddress.address)
+        myUpdateBoardInput.boardAddress.address = boardAddress.address;
+      if (boardAddress.addressDetail)
+        myUpdateBoardInput.boardAddress.addressDetail =
+          boardAddress.addressDetail;
     }
-
-    // if(title !=="") myVariables.updateBoardInput.title = title
-    // if(text !=="") myVariables.updateBoardInput.contents = text
 
     try {
       await updateBoard({
         variables: myVariables,
       });
 
-      alert("게시물수정완료");
-      router.push(`/boards/${router.query.boardId}`);
+      onOkModalOpen();
     } catch (error) {
       console.log(error);
       alert(error);
     }
   };
 
-  //   } catch (error) {
-  //     console.log(error.message)
-  //   }
-  // }}
-
   return (
     <NewBoardUI
       onChangeName={onChangeName}
-      nameErr={nameErr}
       onChangePass={onChangePass}
-      passErr={passErr}
       onChangeTitle={onChangeTitle}
-      titleErr={titleErr}
       onChangeText={onChangeText}
-      textErr={textErr}
-      onChangeAddress={onChangeAddress}
+      inputsErr={inputsErr}
       PutOk={PutOk}
       isActive={isActive}
       isEdit={props.isEdit}
@@ -247,9 +278,13 @@ export default function NewBoard(props: INewBoardConProps) {
       modalOpen={modalOpen}
       clickPostNumber={clickPostNumber}
       onChangeAddressDetail={onChangeAddressDetail}
-      onChangeAddressCode={onChangeAddressCode}
-      addressCode={addressCode}
-      address={address}
+      boardAddress={boardAddress}
+      okModalOpen={okModalOpen}
+      onOkModalOpen={onOkModalOpen}
+      Exit={Exit}
+      EditModalOpen={EditModalOpen}
+      noEditModal={noEditModal}
+      pass={inputs.password}
     />
   );
 }

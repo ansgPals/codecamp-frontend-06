@@ -53,3 +53,36 @@ export const Good = styled.img`
   background-size: cover;
   border: none;
 `;
+export const CatEnglish = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: fit-content;
+  width: fit-content;
+
+  padding: 30px;
+`;
+export const EnglishTitle = styled.div`
+  height: 50px;
+  width: 700px;
+  background-color: azure;
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50px;
+  border: 2px solid pink;
+`;
+
+export const Fect = styled.div`
+  height: fit-content;
+  min-height: 130px;
+  width: 1000px;
+  font-size: 20px;
+  background-color: #fff7e3;
+  text-align: start;
+  padding: 40px;
+  margin-top: 5px;
+  border-radius: 25px;
+  border: 2px solid pink;
+`;
