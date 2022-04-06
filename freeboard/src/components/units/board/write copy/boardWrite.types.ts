@@ -7,7 +7,11 @@ export interface IButtonColorProps {
 //UI
 export interface INewBoardUIProps {
   isEdit: boolean;
+  onChangeName: (event: ChangeEvent<HTMLInputElement>) => void;
   data?: any;
+  onChangePass: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeText: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   EditOk: () => void;
   PutOk: () => void;
   isActive: boolean;
@@ -25,9 +29,6 @@ export interface INewBoardUIProps {
   noEditModal: boolean;
   EditModalOpen: () => void;
   pass: string;
-  onChangeInputs: (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => void;
 }
 
 export interface IboardAddress {
@@ -36,10 +37,10 @@ export interface IboardAddress {
   addressDetail: string;
 }
 export interface IinputsErr {
-  writer: String;
-  password: String;
-  title: String;
-  contents: String;
+  nameErr: string;
+  passErr: string;
+  titleErr: string;
+  textErr: string;
 }
 //컨테이너
 export interface INewBoardConProps {

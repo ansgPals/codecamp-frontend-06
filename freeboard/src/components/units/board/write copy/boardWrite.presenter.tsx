@@ -29,11 +29,11 @@ export default function NewBoardUI(props: INewBoardUIProps) {
               placeholder="이름을 입력하세요"
               id="writer"
               type="text"
-              onChange={props.onChangeInputs}
+              onChange={props.onChangeName}
               defaultValue={props.data?.fetchBoard.writer}
               readOnly={props.data?.fetchBoard.writer ? true : false}
             ></MyStyle.PutName>
-            <MyStyle.MyErr>{props.inputsErr.writer}</MyStyle.MyErr>
+            <MyStyle.MyErr>{props.inputsErr.nameErr}</MyStyle.MyErr>
           </MyStyle.TopLt>
           <MyStyle.TopRt>
             <MyStyle.MyName>비밀번호</MyStyle.MyName>
@@ -41,9 +41,9 @@ export default function NewBoardUI(props: INewBoardUIProps) {
               type="password"
               id="password"
               placeholder="비밀번호를 입력해주세요."
-              onChange={props.onChangeInputs}
+              onChange={props.onChangePass}
             ></MyStyle.PutPass>
-            <MyStyle.MyErr>{props.inputsErr.password}</MyStyle.MyErr>
+            <MyStyle.MyErr>{props.inputsErr.passErr}</MyStyle.MyErr>
           </MyStyle.TopRt>
         </MyStyle.BackTop>
         <MyStyle.TitleBox>
@@ -52,20 +52,20 @@ export default function NewBoardUI(props: INewBoardUIProps) {
             placeholder="제목을 작성해주세요."
             id="title"
             type="text"
-            onChange={props.onChangeInputs}
+            onChange={props.onChangeTitle}
             defaultValue={props.data?.fetchBoard.title}
           ></MyStyle.PutTitle>
-          <MyStyle.MyErr>{props.inputsErr.title}</MyStyle.MyErr>
+          <MyStyle.MyErr>{props.inputsErr.titleErr}</MyStyle.MyErr>
         </MyStyle.TitleBox>
         <MyStyle.TextBox>
           <MyStyle.MyName>내용</MyStyle.MyName>
           <MyStyle.PutText
             placeholder="내용을 작성해주세요."
             id="contents"
-            onChange={props.onChangeInputs}
+            onChange={props.onChangeText}
             defaultValue={props.data?.fetchBoard.contents}
           ></MyStyle.PutText>
-          <MyStyle.MyErr>{props.inputsErr.contents}</MyStyle.MyErr>
+          <MyStyle.MyErr>{props.inputsErr.textErr}</MyStyle.MyErr>
         </MyStyle.TextBox>
         <MyStyle.AddBox>
           <MyStyle.MyName>주소</MyStyle.MyName>

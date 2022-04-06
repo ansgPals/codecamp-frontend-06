@@ -29,10 +29,10 @@ export default function NewBoard(props: INewBoardConProps) {
   });
 
   const [inputsErr, setInputsErr] = useState({
-    writer: "",
-    password: "",
-    title: "",
-    contents: "",
+    nameErr: "",
+    passErr: "",
+    titleErr: "",
+    textErr: "",
   });
 
   const [boardAddress, setBoardAddress] = useState({
@@ -79,17 +79,84 @@ export default function NewBoard(props: INewBoardConProps) {
   >(UPDATE_BOARD);
   const router = useRouter();
 
-  const onChangeInputs = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const newInputs = { ...inputs, [event.target.id]: event.target.value };
-    setInputs(newInputs);
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
+    if (
+      (props.isEdit === true && inputs.password !== "") ||
+      (event.target.value !== "" &&
+        inputs.password !== "" &&
+        inputs.title !== "" &&
+        inputs.contents !== "")
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+    if (event.target.value !== "") {
+      setInputsErr({ ...inputsErr, nameErr: "" });
+    }
+  };
 
-    if (event.target.value)
-      setInputsErr((prev) => ({ ...prev, [event.target.id]: "" }));
+  // Object.values(inputs).forEach((el) => {
+  //   if (el !== "") {
+  //     console.log(true);
+  //   } else {
+  //     console.log(false);
+  //   }
+  // });
 
-    const isActive = Object.values(newInputs).every((el) => el);
-    if (isActive || (props.isEdit && inputs.password)) setIsActive(isActive);
+  const onChangePass = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
+    if (
+      (props.isEdit === true && event.target.value !== "") ||
+      (event.target.value !== "" &&
+        inputs.writer !== "" &&
+        inputs.title !== "" &&
+        inputs.contents !== "")
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+    if (event.target.value !== "") {
+      setInputsErr({ ...inputsErr, passErr: "" });
+    }
+  };
+
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
+    if (
+      (props.isEdit === true && inputs.password !== "") ||
+      (event.target.value !== "" &&
+        inputs.password !== "" &&
+        inputs.writer !== "" &&
+        inputs.contents !== "")
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+    if (event.target.value !== "") {
+      setInputsErr({ ...inputsErr, titleErr: "" });
+    }
+  };
+
+  const onChangeText = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
+    if (
+      (props.isEdit === true && inputs.password !== "") ||
+      (event.target.value !== "" &&
+        inputs.password !== "" &&
+        inputs.title !== "" &&
+        inputs.writer !== "")
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+    if (event.target.value !== "") {
+      setInputsErr({ ...inputsErr, textErr: "" });
+    }
   };
 
   const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
@@ -102,18 +169,18 @@ export default function NewBoard(props: INewBoardConProps) {
 
   const PutOk = async () => {
     if (inputs.writer === "") {
-      inputsErr.writer = "이름을 입력하세요";
+      inputsErr.nameErr = "이름을 입력하세요";
       console.log(inputsErr);
     }
     if (inputs.password === "") {
-      inputsErr.password = "비밀번호를";
+      inputsErr.passErr = "비밀번호를";
     }
     if (inputs.title === "") {
-      inputsErr.title = "제목을 입력하세요";
+      inputsErr.titleErr = "제목을 입력하세요";
     }
 
     if (inputs.contents === "") {
-      setInputsErr({ ...inputsErr, contents: "내용을 입력하세요" });
+      setInputsErr({ ...inputsErr, textErr: "내용을 입력하세요" });
     }
 
     if (
@@ -150,7 +217,7 @@ export default function NewBoard(props: INewBoardConProps) {
       return;
     }
     if (inputs.password === "") {
-      setInputsErr({ ...inputsErr, password: "비밀번호를 입력하세요" });
+      setInputsErr({ ...inputsErr, passErr: "비밀번호를 입력하세요" });
       alert("비밀번호를 입력하세요.");
       return;
     }
@@ -195,6 +262,10 @@ export default function NewBoard(props: INewBoardConProps) {
 
   return (
     <NewBoardUI
+      onChangeName={onChangeName}
+      onChangePass={onChangePass}
+      onChangeTitle={onChangeTitle}
+      onChangeText={onChangeText}
       inputsErr={inputsErr}
       PutOk={PutOk}
       isActive={isActive}
@@ -214,7 +285,6 @@ export default function NewBoard(props: INewBoardConProps) {
       EditModalOpen={EditModalOpen}
       noEditModal={noEditModal}
       pass={inputs.password}
-      onChangeInputs={onChangeInputs}
     />
   );
 }
