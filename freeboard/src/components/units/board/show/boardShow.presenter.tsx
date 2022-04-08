@@ -32,7 +32,11 @@ export default function BoardRoadUI(props: IBoardRoadUIProps) {
           </MyStyle.TopBack>
           <MyStyle.ResponseDataBox>
             <MyStyle.TitleBox>{props.data?.fetchBoard.title}</MyStyle.TitleBox>
-            <MyStyle.ImageBox> </MyStyle.ImageBox>
+            <MyStyle.ImageBox>
+              <MyStyle.IMG
+                src={`https://storage.googleapis.com/${props.data?.fetchBoard.images}`}
+              />
+            </MyStyle.ImageBox>
             <MyStyle.DetailBox>
               {props.data?.fetchBoard.contents}
             </MyStyle.DetailBox>

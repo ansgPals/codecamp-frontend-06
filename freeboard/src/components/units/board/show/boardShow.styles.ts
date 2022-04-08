@@ -100,9 +100,14 @@ export const TitleBox = styled.div`
   font-weight: bold;
 `;
 export const ImageBox = styled.div`
-  width: 996px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+export const IMG = styled.img`
+  width: fit-content;
   height: 480px;
-  background-color: #bdbdbd;
 `;
 export const DetailBox = styled.div`
   margin-top: 50px;

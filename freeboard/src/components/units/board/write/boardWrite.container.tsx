@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
 import NewBoardUI from "./boardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "./boardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./boardWrite.queries";
 import { ChangeEvent } from "react";
 import {
   IMyVariables,
@@ -13,7 +13,11 @@ import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
+import { ImgUpload } from "../libraries/ImgUpload";
+import { checkFileValidation } from "../libraries/validation";
+import { Modal } from "antd";
 
 export default function NewBoard(props: INewBoardConProps) {
   const [isActive, setIsActive] = useState(false);
@@ -40,6 +44,13 @@ export default function NewBoard(props: INewBoardConProps) {
     address: "",
     addressDetail: "",
   });
+
+  const [img, setImg] = useState<string | undefined>("");
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
   const [okModalOpen, setOkModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [noEditModal, setNoEditModal] = useState(false);
@@ -100,6 +111,25 @@ export default function NewBoard(props: INewBoardConProps) {
     setYoutubeUrl(event.target.value);
   };
 
+  const OnChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log(file);
+    // ---------검증-----
+    const isValid = checkFileValidation(file);
+    if (!isValid) return;
+    console.log("오웅");
+    try {
+      const result = await uploadFile({ variables: { file } });
+      console.log("요깅" + result.data?.uploadFile.url);
+      setImg(String(result.data?.uploadFile.url));
+    } catch (error: any) {
+      Modal.error({ content: error.massage });
+    }
+  };
+  const OnClickImg = () => {
+    fileRef.current?.click();
+  };
+
   const PutOk = async () => {
     if (inputs.writer === "") {
       inputsErr.writer = "이름을 입력하세요";
@@ -129,6 +159,7 @@ export default function NewBoard(props: INewBoardConProps) {
               ...inputs,
               youtubeUrl: youtubeUrl,
               boardAddress: { ...boardAddress },
+              images: [String(img)],
             },
           },
         });
@@ -215,6 +246,10 @@ export default function NewBoard(props: INewBoardConProps) {
       noEditModal={noEditModal}
       pass={inputs.password}
       onChangeInputs={onChangeInputs}
+      OnChangeFile={OnChangeFile}
+      fileRef={fileRef}
+      OnClickImg={OnClickImg}
+      img={img}
     />
   );
 }

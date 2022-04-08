@@ -122,11 +122,25 @@ export default function NewBoardUI(props: INewBoardUIProps) {
         </MyStyle.YouTubeBox>
         <MyStyle.PhotoBox>
           <MyStyle.MyName>사진첨부</MyStyle.MyName>
+          <input
+            style={{ display: "none" }}
+            type="file"
+            onChange={props.OnChangeFile}
+            ref={props.fileRef}
+          />
+
           <MyStyle.GrayBoxBox>
-            <MyStyle.GrayBox>
-              <MyStyle.MyPlus>+</MyStyle.MyPlus>
-              <MyStyle.MyUpload>Upload</MyStyle.MyUpload>
-            </MyStyle.GrayBox>
+            {props.img ? (
+              <MyStyle.IMG1
+                src={`https://storage.googleapis.com/${props.img}`}
+              />
+            ) : (
+              <MyStyle.GrayBox onClick={props.OnClickImg}>
+                <MyStyle.MyPlus>+</MyStyle.MyPlus>
+                <MyStyle.MyUpload>Upload</MyStyle.MyUpload>
+              </MyStyle.GrayBox>
+            )}
+
             <MyStyle.GrayBox>
               <MyStyle.MyPlus>+</MyStyle.MyPlus>
               <MyStyle.MyUpload>Upload</MyStyle.MyUpload>

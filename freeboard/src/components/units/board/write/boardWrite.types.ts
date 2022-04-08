@@ -28,6 +28,10 @@ export interface INewBoardUIProps {
   onChangeInputs: (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => void;
+  OnChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
+  fileRef: any;
+  OnClickImg: () => void;
+  img: string | undefined;
 }
 
 export interface IboardAddress {
