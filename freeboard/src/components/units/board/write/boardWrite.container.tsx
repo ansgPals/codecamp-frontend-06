@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
 import NewBoardUI from "./boardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./boardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./boardWrite.queries";
 import { ChangeEvent } from "react";
 import {
   IMyVariables,
@@ -15,15 +15,15 @@ import {
   IMutationUpdateBoardArgs,
   IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
-import { ImgUpload } from "../libraries/ImgUpload";
-import { checkFileValidation } from "../libraries/validation";
-import { Modal } from "antd";
+// import { ImgUpload } from "../libraries/ImgUpload";
+// import { checkFileValidation } from "../libraries/validation";
+// import { Modal } from "antd";
 
 export default function NewBoard(props: INewBoardConProps) {
   const [isActive, setIsActive] = useState(false);
   const [newId, setNewId] = useState<any>("");
-
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [inputs, setInputs] = useState({
     writer: "",
@@ -45,12 +45,10 @@ export default function NewBoard(props: INewBoardConProps) {
     addressDetail: "",
   });
 
-  const [img, setImg] = useState<string | undefined>("");
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
+  // const [uploadFile] = useMutation<
+  //   Pick<IMutation, "uploadFile">,
+  //   IMutationUploadFileArgs
+  // >(UPLOAD_FILE);
   const [okModalOpen, setOkModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [noEditModal, setNoEditModal] = useState(false);
@@ -111,23 +109,10 @@ export default function NewBoard(props: INewBoardConProps) {
     setYoutubeUrl(event.target.value);
   };
 
-  const OnChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    console.log(file);
-    // ---------검증-----
-    const isValid = checkFileValidation(file);
-    if (!isValid) return;
-    console.log("오웅");
-    try {
-      const result = await uploadFile({ variables: { file } });
-      console.log("요깅" + result.data?.uploadFile.url);
-      setImg(String(result.data?.uploadFile.url));
-    } catch (error: any) {
-      Modal.error({ content: error.massage });
-    }
-  };
-  const OnClickImg = () => {
-    fileRef.current?.click();
+  const onChangeFileUrls = (fileUrl: string, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
 
   const PutOk = async () => {
@@ -159,7 +144,7 @@ export default function NewBoard(props: INewBoardConProps) {
               ...inputs,
               youtubeUrl: youtubeUrl,
               boardAddress: { ...boardAddress },
-              images: [String(img)],
+              images: fileUrls,
             },
           },
         });
@@ -176,6 +161,10 @@ export default function NewBoard(props: INewBoardConProps) {
   };
 
   const EditOk = async () => {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
     if (!inputs.writer && !inputs.contents) {
       EditModalOpen();
       return;
@@ -196,6 +185,7 @@ export default function NewBoard(props: INewBoardConProps) {
     if (inputs.title) myUpdateBoardInput.title = inputs.title;
     if (inputs.contents) myUpdateBoardInput.contents = inputs.contents;
     if (youtubeUrl !== "") myUpdateBoardInput.youtubeUrl = youtubeUrl;
+    if (isChangedFiles) myUpdateBoardInput.images = fileUrls;
 
     if (
       boardAddress.address ||
@@ -224,6 +214,12 @@ export default function NewBoard(props: INewBoardConProps) {
     }
   };
 
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
+
   return (
     <NewBoardUI
       inputsErr={inputsErr}
@@ -246,10 +242,9 @@ export default function NewBoard(props: INewBoardConProps) {
       noEditModal={noEditModal}
       pass={inputs.password}
       onChangeInputs={onChangeInputs}
-      OnChangeFile={OnChangeFile}
-      fileRef={fileRef}
-      OnClickImg={OnClickImg}
-      img={img}
+      // OnChangeFile={OnChangeFile}
+      onChangeFileUrls={onChangeFileUrls}
+      fileUrls={fileUrls}
     />
   );
 }

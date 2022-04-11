@@ -28,10 +28,9 @@ export interface INewBoardUIProps {
   onChangeInputs: (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => void;
-  OnChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
-  fileRef: any;
-  OnClickImg: () => void;
-  img: string | undefined;
+
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
+  fileUrls: string[];
 }
 
 export interface IboardAddress {
@@ -55,6 +54,7 @@ export interface IUpDateBoardInput {
   contents?: string;
   youtubeUrl?: string;
   boardAddress?: { addressDetail?: string; address?: string; zipcode?: string };
+  images?: string[];
 }
 
 export interface IMyVariables {

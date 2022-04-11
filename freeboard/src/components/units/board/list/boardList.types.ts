@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 //UI
@@ -13,6 +13,9 @@ export interface IBoardListUIProps {
   startPage: number;
   lastPage: number;
   pickPage: number;
+  keyWord: string;
+  onchangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  inputRef: any;
 }
 //컨테이너
 export interface IBoardList {

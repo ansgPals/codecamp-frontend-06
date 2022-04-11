@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { globalstyles } from "../src/commons/styled/globalStyled";
 import { Global } from "@emotion/react";
 import { createUploadLink } from "apollo-upload-client";
+import { RecoilRoot } from "recoil";
 
 export default function MyApp({ Component, pageProps }) {
   const uploardLink = createUploadLink({
@@ -24,11 +25,13 @@ export default function MyApp({ Component, pageProps }) {
   });
 
   return (
-    <ApolloProvider client={client}>
-      <Global styles={globalstyles} />
-      <LayOut>
-        <Component {...pageProps} />
-      </LayOut>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloProvider client={client}>
+        <Global styles={globalstyles} />
+        <LayOut>
+          <Component {...pageProps} />
+        </LayOut>
+      </ApolloProvider>
+    </RecoilRoot>
   );
 }

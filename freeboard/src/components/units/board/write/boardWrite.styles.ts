@@ -186,31 +186,31 @@ export const GrayBoxBox = styled.div`
   justify-content: flex-start;
   align-items: center;
 `;
-export const GrayBox = styled.button`
-  height: 78px;
-  width: 78px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #bdbdbd;
-  margin-right: 20px;
-  cursor: pointer;
-`;
-export const IMG1 = styled.img`
-  margin-right: 20px;
+// export const GrayBox = styled.button`
+//   height: 78px;
+//   width: 78px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: #bdbdbd;
+//   margin-right: 20px;
+//   cursor: pointer;
+// `;
+// export const IMG1 = styled.img`
+//   margin-right: 20px;
 
-  height: 78px;
-  width: 78px;
-`;
-export const MyPlus = styled.div`
-  font-size: 12px;
-  color: #4f4f4f;
-`;
-export const MyUpload = styled.div`
-  font-size: 12px;
-  color: #4f4f4f;
-`;
+//   height: 78px;
+//   width: 78px;
+// `;
+// export const MyPlus = styled.div`
+//   font-size: 12px;
+//   color: #4f4f4f;
+// `;
+// export const MyUpload = styled.div`
+//   font-size: 12px;
+//   color: #4f4f4f;
+// `;
 
 export const MainBox = styled.div`
   display: flex;

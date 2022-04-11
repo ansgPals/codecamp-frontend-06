@@ -15,7 +15,7 @@ const Body = styled.div`
   align-items: center;
 `;
 
-const HIDDEN_PAGE = ["/"];
+const HIDDEN_PAGE = ["/", "/login/SignUp"];
 
 interface ILayoutProps {
   children: ReactNode;
@@ -25,9 +25,9 @@ export default function LayOut(props: ILayoutProps) {
   const isHidden = HIDDEN_PAGE.includes(router.asPath);
   return (
     <>
+      <LayOutHeader />
       {!isHidden && (
         <div>
-          <LayOutHeader />
           <LayOutBanner />
           <LayOutNavigation />
         </div>

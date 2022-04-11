@@ -2,6 +2,8 @@ import * as MyStyle from "./boardWrite.styles";
 import { INewBoardUIProps } from "./boardWrite.types";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
+import Uploads01 from "../uploads01/Uploads01.container";
+import { v4 as uuid } from "uuid";
 
 export default function NewBoardUI(props: INewBoardUIProps) {
   return (
@@ -122,15 +124,24 @@ export default function NewBoardUI(props: INewBoardUIProps) {
         </MyStyle.YouTubeBox>
         <MyStyle.PhotoBox>
           <MyStyle.MyName>사진첨부</MyStyle.MyName>
-          <input
+          {/* <input
             style={{ display: "none" }}
             type="file"
             onChange={props.OnChangeFile}
             ref={props.fileRef}
-          />
+          /> */}
 
           <MyStyle.GrayBoxBox>
-            {props.img ? (
+            {props.fileUrls.map((el, index) => (
+              <Uploads01
+                key={uuid()}
+                index={index}
+                fileUrl={el}
+                onChangeFileUrls={props.onChangeFileUrls}
+              />
+            ))}
+
+            {/* {props.img ? (
               <MyStyle.IMG1
                 src={`https://storage.googleapis.com/${props.img}`}
               />
@@ -148,9 +159,10 @@ export default function NewBoardUI(props: INewBoardUIProps) {
             <MyStyle.GrayBox>
               <MyStyle.MyPlus>+</MyStyle.MyPlus>
               <MyStyle.MyUpload>Upload</MyStyle.MyUpload>
-            </MyStyle.GrayBox>
+            </MyStyle.GrayBox> */}
           </MyStyle.GrayBoxBox>
         </MyStyle.PhotoBox>
+
         <MyStyle.MainBox>
           <MyStyle.MyName>메인 설정</MyStyle.MyName>
           <MyStyle.MySelect>

@@ -39,7 +39,10 @@ export default function MapBoardPage() {
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
-  >(FETCH_BOARDS);
+  >(FETCH_BOARDS, {
+    variables,
+    fetchPolicy: "",
+  });
 
   const getDebounce = _.debounce((data) => {
     refetch({ search: data, page: 1 });
