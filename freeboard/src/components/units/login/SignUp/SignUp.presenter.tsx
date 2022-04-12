@@ -9,8 +9,10 @@ interface ISignUpPropsUI {
     email: string;
     password: string;
     name: string;
+    password2: string;
   };
   isActive: boolean;
+  onChangePasswordOk: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 export interface IButtonProps {
   isActive: boolean;
@@ -60,9 +62,9 @@ export default function SignUpPresenter(props: ISignUpPropsUI) {
               placeholder="비밀번호확인을 입력해주세요."
               type="password"
               onChange={props.onChangeInputs}
-              id="password"
+              id="password2"
             ></S.InputBox>
-            <S.InputErr>{props.inputsErr.password}</S.InputErr>
+            <S.InputErr>{props.inputsErr.password2}</S.InputErr>
           </S.JustBox>
           <S.SignUpButton
             onClick={props.onClickSignUp}

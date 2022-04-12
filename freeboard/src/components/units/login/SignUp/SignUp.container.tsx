@@ -20,6 +20,7 @@ export const CREATE_USER = gql`
 export default function SignUpContainer() {
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [passOk, setPassOk] = useState("");
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -28,6 +29,7 @@ export default function SignUpContainer() {
   const [inputsErr, setInputsErr] = useState({
     email: "",
     password: "",
+    password2: "",
     name: "",
   });
   const [createUser] = useMutation<
@@ -35,21 +37,62 @@ export default function SignUpContainer() {
     IMutationCreateUserArgs
   >(CREATE_USER);
 
+  const onChangePasswordOk = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value !== inputs.password) {
+      setInputsErr((prev) => ({
+        ...prev,
+        password2: "입력하신비밀번호와 다릅니다!",
+      }));
+    }
+    setPassOk(event.target.value);
+  };
+
   const onChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
-    const newInputs = { ...inputs, [event.target.id]: event.target.value };
-    setInputs(newInputs);
+    if (
+      event.target.id === "email" &&
+      !/^\w+\@\w+\.\w+$/.test(event.target.value)
+    ) {
+      setInputsErr((prev) => ({
+        ...prev,
+        email: "이메일형식을 확인하세요!!",
+      }));
+      return;
+    }
+
+    if (
+      event.target.id === "password2" &&
+      event.target.value !== inputs.password
+    ) {
+      setInputsErr((prev) => ({
+        ...prev,
+        password2: "입력하신비밀번호와 다릅니다!",
+      }));
+      return;
+    }
+
     if (event.target.value)
       setInputsErr((prev) => ({ ...prev, [event.target.id]: "" }));
+
+    const newInputs = { ...inputs };
+    if (event.target.id !== "password2") {
+      const newInputs = { ...inputs, [event.target.id]: event.target.value };
+      setInputs(newInputs);
+    }
     const isActive = Object.values(newInputs).every((el) => el);
     setIsActive(isActive);
   };
+
   const onClickSignUp = async () => {
-    setInputsErr({
+    setInputsErr((prev) => ({
+      ...prev,
       email: inputs.email ? "" : "이메일을 입력해주세요.",
       password: inputs.password ? "" : "비밀번호를 입력해주세요.",
+      // password2:
+      //   inputs.password === passOk ? "" : "입력하신비밀번호와 다릅니다!",
       name: inputs.name ? "" : "이름을 입력해주세요.",
-    });
-    if (Object.values(inputs).every((el) => el)) {
+    }));
+    if (inputsErr.password2) alert("비밀번호를 확인하세요!");
+    if (Object.values(inputs).every((el) => el) && !inputsErr.password2) {
       try {
         const result = await createUser({
           variables: {
@@ -75,6 +118,7 @@ export default function SignUpContainer() {
       onClickSignUp={onClickSignUp}
       inputsErr={inputsErr}
       isActive={isActive}
+      onChangePasswordOk={onChangePasswordOk}
     />
   );
 }
