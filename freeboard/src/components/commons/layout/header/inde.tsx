@@ -1,6 +1,9 @@
+import { gql, useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/store";
+import { IMutation } from "../../../../commons/types/generated/types";
 const Wrapper = styled.div`
   height: 70px;
   width: 1920px;
@@ -61,8 +64,15 @@ const SignUpButton = styled.button`
   background-color: #f8f5d6;
   cursor: pointer;
 `;
+const LOGOUT_USER = gql`
+  mutation logoutUser {
+    logoutUser
+  }
+`;
 
 export default function LayOutHeader() {
+  const [accessToken] = useRecoilState(accessTokenState);
+  const [logoutUser] = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
   const router = useRouter();
 
   const onClickLogin = () => {
@@ -74,13 +84,23 @@ export default function LayOutHeader() {
   const onClickTitle = () => {
     router.push(`/boards`);
   };
+  const onClickLogout = async () => {
+    await logoutUser();
+  };
   return (
     <Wrapper>
       <Goangsss onClick={onClickTitle}>GOANGSSS</Goangsss>
-      <Log>
-        <LoginButton onClick={onClickLogin}>로그인</LoginButton>
-        <SignUpButton onClick={onClickSignUp}>회원가입</SignUpButton>
-      </Log>
+      {!accessToken ? (
+        <Log>
+          <LoginButton onClick={onClickLogin}>로그인</LoginButton>
+          <SignUpButton onClick={onClickSignUp}>회원가입</SignUpButton>
+        </Log>
+      ) : (
+        <Log>
+          <LoginButton>마이페이지</LoginButton>
+          <LoginButton onClick={onClickLogout}>로그아웃</LoginButton>
+        </Log>
+      )}
     </Wrapper>
   );
 }

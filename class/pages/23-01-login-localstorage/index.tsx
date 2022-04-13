@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../src/commons/store";
-
 import {
   IMutation,
   IMutationLoginUserArgs,
@@ -34,18 +33,16 @@ export default function LoginPage() {
     setPassword(event.target.value);
   };
   const onClickLogin = async () => {
-    try {
-      const result = await loginUser({
-        variables: { email, password },
-      });
-      const accessToken = result.data?.loginUser.accessToken;
-      console.log(accessToken);
-      setAccessToken(accessToken);
-      alert("로그인에 성공하셨습니다.");
-      router.push(`/day22-02-login-success`);
-    } catch (error) {
-      console.log(error);
-    }
+    const result = await loginUser({
+      variables: { email, password },
+    });
+    const accessToken = result.data?.loginUser.accessToken;
+    console.log(accessToken);
+    setAccessToken(accessToken || "");
+
+    localStorage.setItem("accessToken", accessToken || "");
+    alert("로그인에 성공하셨습니다.");
+    router.push(`/23-02-login-localstorage-success`);
   };
   return (
     <>

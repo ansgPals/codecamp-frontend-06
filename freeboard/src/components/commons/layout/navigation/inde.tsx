@@ -28,7 +28,7 @@ const Navi1 = styled.div`
 
 export default function LayOutNavigation() {
   const router = useRouter();
-  const GOGO = (event) => {
+  const GOGO = (event: any) => {
     router.push(`/${event.target.id}`);
   };
   return (

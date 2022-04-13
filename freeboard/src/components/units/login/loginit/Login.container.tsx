@@ -1,6 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/store";
 import {
   IMutation,
   IMutationCreateUserArgs,
@@ -17,6 +19,8 @@ export const LOGIN_USER = gql`
 `;
 
 export default function LogInContainer() {
+  const [, setAccessToken] = useRecoilState(accessTokenState);
+
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,7 +30,7 @@ export default function LogInContainer() {
   const [passErr, setPassErr] = useState("");
 
   const [loginUser] = useMutation<
-    Pick<IMutation, "createUser">,
+    Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
 
@@ -62,7 +66,11 @@ export default function LogInContainer() {
             password,
           },
         });
+        const accessToken = result.data?.loginUser.accessToken;
+        setAccessToken(accessToken || "");
+
         alert("어서오세요 집사님!!");
+        router.push(`/boards`);
       } catch (error: any) {
         console.log(error);
         alert(error.message);

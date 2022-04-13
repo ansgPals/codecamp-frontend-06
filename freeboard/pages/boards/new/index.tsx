@@ -1,7 +1,5 @@
-import NewBoard from "../../../src/components/units/board/write/boardWrite.container"
+import NewBoard from "../../../src/components/units/board/write/boardWrite.container";
 
- export default function NewBoardPage(){
-
-    return <NewBoard isEdit = {false}/>
-  }
-
+export default function NewBoardPage() {
+  return <NewBoard isEdit={false} />;
+}

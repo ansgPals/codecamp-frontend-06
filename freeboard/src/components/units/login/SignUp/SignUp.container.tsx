@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
 import { async, createMockUserToken } from "@firebase/util";
 import { prepareServerlessUrl } from "next/dist/server/base-server";
+import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import {
   IMutation,
@@ -18,6 +19,7 @@ export const CREATE_USER = gql`
 `;
 
 export default function SignUpContainer() {
+  const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [passOk, setPassOk] = useState("");
@@ -101,7 +103,8 @@ export default function SignUpContainer() {
             },
           },
         });
-        alert("회원가입을 환영합니다!!");
+        alert("회원가입을 환영합니다!! 한번더 로그인해주세요!");
+        router.push(`/login`);
       } catch (error: any) {
         console.log(error);
       }

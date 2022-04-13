@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { collection, getDocs, getFirestore } from "firebase/firestore/lite";
 import { useRouter } from "next/router";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { firebaseApp } from "../_app";
 import { v4 as v4uuid } from "uuid";
 

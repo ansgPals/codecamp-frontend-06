@@ -47,7 +47,7 @@ export interface IinputsErr {
 //컨테이너
 export interface INewBoardConProps {
   isEdit: boolean;
-  data: any;
+  // data: any;
 }
 export interface IUpDateBoardInput {
   title?: string;
