@@ -1,7 +1,5 @@
 export default function HofPage() {
-  const onClickChild = (el) = (event) => {
-      
-  });
+  const onClickChild = (el) => (event) => {};
 
   return (
     <div>

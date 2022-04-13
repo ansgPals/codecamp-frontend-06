@@ -6,7 +6,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../commons/store";
+import { accessTokenState } from "../../../commons/store";
 
 export default function ApolloConfig(props) {
   const [accessToken] = useRecoilState(accessTokenState);

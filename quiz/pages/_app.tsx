@@ -1,12 +1,12 @@
 import "../styles/globals.css";
 import "antd/dist/antd.css";
-import LayOut from "../src/components/layout";
+import LayOut from "../src/components/commons/layout";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { globalstyles } from "../src/commons/styled/globalStyled";
 import { Global } from "@emotion/react";
 import { RecoilRoot } from "recoil";
-import ApolloConfig from "../src/components/apollo";
+import ApolloConfig from "../src/components/commons/apollo";
 
 export default function MyApp({ Component, pageProps }) {
   return (

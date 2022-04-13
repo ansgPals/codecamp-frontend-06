@@ -1,4 +1,4 @@
-import { accessTokenState } from "../../commons/store";
+import { accessTokenState } from "../../../commons/store";
 import { createUploadLink } from "apollo-upload-client";
 import {
   ApolloClient,
