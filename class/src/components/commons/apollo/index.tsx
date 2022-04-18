@@ -1,4 +1,4 @@
-import { accessTokenState } from "../../../commons/store";
+import { accessTokenState, userInfoState } from "../../../commons/store";
 import { createUploadLink } from "apollo-upload-client";
 import {
   ApolloClient,
@@ -11,6 +11,7 @@ import { useEffect } from "react";
 
 export default function ApolloSetting(props: any) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setUserInfo] = useRecoilState(userInfoState);
 
   // 프리랜더링시 문제되는 코드
   // const myLocalStorageAccessToken = localStorage.accessToken;
@@ -32,8 +33,10 @@ export default function ApolloSetting(props: any) {
 
   // 3)세번째방법!
   useEffect(() => {
-    const myLocalStorageAccessToken = localStorage.accessToken;
-    setAccessToken(myLocalStorageAccessToken || "");
+    const accessToken = localStorage.getItem("accessToken");
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    setAccessToken(accessToken || "");
+    setUserInfo(userInfo);
   }, []);
 
   const uploardLink = createUploadLink({
