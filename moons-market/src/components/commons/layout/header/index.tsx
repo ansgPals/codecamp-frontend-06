@@ -86,7 +86,8 @@ export default function LayOutHeader() {
     router.push(`/boards`);
   };
   const onClickLogout = async () => {
-    await logoutUser();
+    const result = await logoutUser();
+    console.log(result);
   };
   return (
     <Wrapper>

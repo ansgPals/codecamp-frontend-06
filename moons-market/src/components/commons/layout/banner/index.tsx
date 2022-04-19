@@ -2,34 +2,30 @@ import styled from "@emotion/styled";
 import Slider from "react-slick";
 
 const Wrapper = styled.div`
-  height: 200px;
-  width:100vw;
+  background-color: #ddffb1;
+
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("/고앵.png");
-  background-size: unset;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-color: #afa9ff;
   border-radius: 200px;
 `;
 const Carousel = styled(Slider)`
-  height: 300px;
+  height: 120px;
   width: 1200px;
 `;
 const CarouselBox = styled.div`
   font-size: 90px;
   text-align: center;
-  color: white;
-  line-height: 300px;
+  line-height: 100px;
 `;
+
 export default function LayOutBanner() {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 200,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
@@ -40,7 +36,7 @@ export default function LayOutBanner() {
           <h2></h2>
           <Carousel {...settings}>
             <div>
-              <CarouselBox> I am ZipSA</CarouselBox>
+              <CarouselBox>ㅇㅇㅇ</CarouselBox>
             </div>
             <div>
               <CarouselBox> I am CanOpenner</CarouselBox>

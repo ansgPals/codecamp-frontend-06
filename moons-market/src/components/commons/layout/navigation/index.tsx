@@ -8,22 +8,24 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #f1a3b6;
+  background-color: #ffffff;
+  border-bottom: 3px #52c83a solid;
+  border-top: 3px #52c83a solid;
 `;
 const Navi1 = styled.div`
   font-size: 25px;
   margin-left: 70px;
   margin-right: 50px;
-  color: #37127c;
+  color: #0aaf25;
   cursor: pointer;
   width: 200px;
   height: 50px;
   text-align: center;
   line-height: 50px;
-  border-radius: 15px;
-  border: 1px solid #f7f7f7;
-  background-color: #fff7cb;
-  font-weight: 600;
+  font-weight: bold;
+  :hover{
+    color : #49d260;
+  }
 `;
 
 export default function LayOutNavigation() {
@@ -36,8 +38,8 @@ export default function LayOutNavigation() {
       <Navi1 id={"boards"} onClick={GOGO}>
         게시물 목록
       </Navi1>
-      <Navi1 id={"boards/new"} onClick={GOGO}>
-        글쓰기
+      <Navi1 id={"usedItem"} onClick={GOGO}>
+        마켓
       </Navi1>
     </Wrapper>
   );

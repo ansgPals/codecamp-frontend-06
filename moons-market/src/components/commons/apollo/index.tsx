@@ -7,9 +7,14 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { useRecoilState } from "recoil";
+import { useEffect } from "react";
 
 export default function ApolloSetting(props: any) {
-  const [accessToken] = useRecoilState(accessTokenState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    setAccessToken(accessToken || "");
+  }, []);
 
   const uploardLink = createUploadLink({
     uri: "http://backend06.codebootcamp.co.kr/graphql",
