@@ -8,6 +8,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_USEDITEM, UPDATE_USEDITEM } from "./newProduct.query";
 import { useRouter } from "next/router";
 import { async } from "@firebase/util";
+import dynamic from "next/dynamic";
 
 
 const schema = yup.object({
@@ -25,7 +26,7 @@ const schema = yup.object({
     images?: string[];
   }
   export default function NewProductContainer(props) {
-    const { register, handleSubmit, formState } = useForm({
+    const { register, handleSubmit, formState,setValue,trigger } = useForm({
       resolver: !props.isEdit && yupResolver(schema),
       mode: "onChange",
     });
@@ -36,7 +37,18 @@ const schema = yup.object({
     const [okModalOpen, setOkModalOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [noEditModal, setNoEditModal] = useState(false);
-  
+    
+    const [createUseditem] = useMutation<
+      Pick<IMutation, "createUseditem">,
+      IMutationCreateUseditemArgs
+    >(CREATE_USEDITEM);
+
+    const [updateUseditem] = useMutation<
+      Pick<IMutation,"updateUseditem" >,
+      IMutationUpdateUseditemArgs
+    >(UPDATE_USEDITEM);
+
+    const router = useRouter();
     const onOkModalOpen = () => {
       setOkModalOpen((prev) => !prev);
     };
@@ -51,22 +63,21 @@ const schema = yup.object({
     const onClickPostNumber = () => {
       onModalOpen();
     };
-  
-    const [createUseditem] = useMutation<
-      Pick<IMutation, "createUseditem">,
-      IMutationCreateUseditemArgs
-    >(CREATE_USEDITEM);
 
-    const [updateUseditem] = useMutation<
-      Pick<IMutation,"updateUseditem" >,
-      IMutationUpdateUseditemArgs
-    >(UPDATE_USEDITEM);
-    const router = useRouter();
   
     const onChangeFileUrls = (fileUrl: string, index: number) => {
       const newFileUrls = [...fileUrls];
       newFileUrls[index] = fileUrl;
       setFileUrls(newFileUrls);
+    };
+    const onChangeContents = (value: string) => {
+      console.log(value);
+  
+      // register로 등록하지 않고 강제로 값을 넣어주는 기능!
+      setValue("contents", value === "<p><br></p>" ? "" : value);
+  
+      // onChange 됐다고 react-hook-form에 알려주는 기능
+      trigger("contents");
     };
     interface IFormValues {
         name?: string;
@@ -152,5 +163,7 @@ const schema = yup.object({
     noEditModal={noEditModal}
     data={props.data}
     EditOk={EditOk}
+    onChangeContents={onChangeContents}
+    
     />
 }

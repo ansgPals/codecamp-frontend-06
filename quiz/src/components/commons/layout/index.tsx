@@ -17,7 +17,7 @@ const BodyWrapper = styled.div`
   display: flex;
 `;
 const Body = styled.div`
-  background-color: #7e52ee;
+  background-color: #f8f5ff;
   display: flex;
   flex-direction: column;
   justify-content: center;

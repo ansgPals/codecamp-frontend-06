@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export const BackGround = styled.div`
   margin-top: 30px;
@@ -60,7 +63,7 @@ margin-top: 20px;
 `;
 export const PutName = styled.input`
   font-size: 16px;
-  color: #c4c4c4;
+
   border:3px  solid #ffdb86;
   width: 500px;
   height: 52px;
@@ -79,7 +82,7 @@ export const TopRt = styled.div`
 `;
 export const PutPass = styled.input`
   font-size: 16px;
-  color: #c4c4c4;
+
   border: 3px  solid #ffdb86;
   width: 500px;
   height: 52px;
@@ -99,7 +102,7 @@ export const TitleBox = styled.div`
 
 export const PutTitle = styled.input`
   font-size: 16px;
-  color: #c4c4c4;
+
   border: 3px solid #ffdb86;
   width: 500px;
   height: 52px;
@@ -115,17 +118,34 @@ export const TextBox = styled.div`
   justify-content: center;
   align-items: flex-start;
 `;
+export const Editor = styled(ReactQuill)`
+.ql-editor {
+height: 300px;
+width: 600px;
 
-export const PutText = styled.input`
-  font-size: 16px;
-  color: #c4c4c4;
-  border: 3px  solid #ffdb86;
-  width: 600px;
-  min-height: 200px;
-  margin-top: 12px;
-  border-radius: 15px;
-  padding-left: 10px;
-`;
+}
+.ql-toolbar{ 
+  background-color: #ffdb86;
+  border: 3px solid #ffdb86;
+    border-radius: 15px;
+  }
+  
+  .ql-container {
+    border: 3px solid #ffdb86;
+    border-radius: 15px;
+    font-size: 20px;
+  }
+`
+// export const PutText = styled.input`
+//   font-size: 16px;
+//   color: #c4c4c4;
+//   border: 3px  solid #ffdb86;
+//   width: 600px;
+//   min-height: 200px;
+//   margin-top: 12px;
+//   border-radius: 15px;
+//   padding-left: 10px;
+// `;
 export const AddBox = styled.div`
   height: 300px;
   width: 1000px;

@@ -2,9 +2,12 @@ import { Modal } from 'antd';
 import * as S from '../newProduct/newProduct.styles'
 import Uploads01 from '../uploads01/Uploads01.container';
 import { v4 as uuid } from "uuid";
+import dynamic from 'next/dynamic';
+
 
 export default function NewProductUI(props) {
-    return (
+
+  return (
         <S.BackGround>
           <S.MyTitle>상품판매{props.isEdit ? "수정" : "등록"}</S.MyTitle>
           <Modal visible={props.okModalOpen} onOk={props.Exit} onCancel={props.onOkModalOpen}>
@@ -49,12 +52,17 @@ export default function NewProductUI(props) {
               </S.TitleBox>
               <S.TextBox>
                 <S.MyName>내용</S.MyName>
-                <S.PutText
+                <S.Editor onChange={props.onChangeContents}
+                 defaultValue={props.data?.fetchUseditem.contents}
+                 placeholder="판매하실 상품의 상세설명을 입력해주세요."
+                />
+
+                {/* <S.PutText
                   type="text"
                   {...props.register("contents")}
                   defaultValue={props.data?.fetchUseditem.contents}
 
-                />
+                /> */}
                 <S.MyErr>{props.formState.errors.contents?.message}</S.MyErr>
               </S.TextBox>
               <S.PhotoBox>
