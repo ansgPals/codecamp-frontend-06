@@ -1,6 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { IQuery, IQueryFetchUseditemArgs } from "../../../../src/commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchUseditemArgs,
+} from "../../../../src/commons/types/generated/types";
+import { useAuth } from "../../../../src/components/commons/hocs/useAuth";
 import NewProductContainer from "../../../../src/components/units/newProduct/newProduct.container";
 
 export const FETCH_USEDITEM = gql`
@@ -32,16 +36,18 @@ export const FETCH_USEDITEM = gql`
     }
   }
 `;
-export default function ProductEditPage() {
-    const router = useRouter();
+function ProductEditPage() {
+  useAuth();
+  const router = useRouter();
 
-    const { data } = useQuery<
+  const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
   >(FETCH_USEDITEM, {
     variables: { useditemId: String(router.query.productId) },
   });
 
-    return <NewProductContainer isEdit={true} data={data} />;
-  }
-  
+  return <NewProductContainer isEdit={true} data={data} />;
+}
+
+export default ProductEditPage;

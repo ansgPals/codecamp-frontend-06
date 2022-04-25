@@ -1,10 +1,8 @@
+import { useAuth } from "../../../src/components/commons/hocs/useAuth";
 import NewProductContainer from "../../../src/components/units/newProduct/newProduct.container";
 
-export default function newProductPage(){
-  return <NewProductContainer
-  isEdit={false}
-  />
+function newProductPage() {
+  useAuth();
+  return <NewProductContainer isEdit={false} />;
 }
-
-
-
+export default newProductPage;

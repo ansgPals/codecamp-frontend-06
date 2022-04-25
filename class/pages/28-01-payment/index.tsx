@@ -32,7 +32,7 @@ export default function PaymentPage() {
         // callback
         if (rsp.success) {
           // 결제 성공 시 로직,
-          console.log(rsp.success);
+          console.log(rsp);
           // 백엔드에 결제관련 데이터 넘겨주기(=>즉, 뮤테이션 실행하기)
           // ex) createPointTransactionOfLoading 하고나면 패치유저로그드인의 유저포인트 어마운트에 금액 들어옴
         } else {

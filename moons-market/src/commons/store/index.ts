@@ -10,9 +10,18 @@ export const userInfoState = atom({
   default: {
     email: "",
     name: "",
+    _id: "",
+    userPoint: {
+      amount: 0,
+    },
   },
 });
 export const visitedPageState = atom({
   key: "visitedPageState",
   default: "/",
+});
+
+export const todayProductState = atom({
+  key: "todayProductState",
+  default: [],
 });

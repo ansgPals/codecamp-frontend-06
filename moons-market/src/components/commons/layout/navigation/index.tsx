@@ -1,16 +1,13 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-
+import Toolbar from "@mui/material/Toolbar";
 const Wrapper = styled.div`
-  height: 60px;
   width: 100vw;
+  height: 70px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-  border-bottom: 3px #52c83a solid;
-  border-top: 3px #52c83a solid;
+  background-color: #dcffdf;
+  position: fixed;
+  border-bottom: 1px #dcffdf solid;
 `;
 const Navi1 = styled.div`
   font-size: 25px;
@@ -23,8 +20,8 @@ const Navi1 = styled.div`
   text-align: center;
   line-height: 50px;
   font-weight: bold;
-  :hover{
-    color : #49d260;
+  :hover {
+    color: #49d260;
   }
 `;
 
@@ -35,12 +32,14 @@ export default function LayOutNavigation() {
   };
   return (
     <Wrapper>
-      <Navi1 id={"boards"} onClick={GOGO}>
-        게시물 목록
-      </Navi1>
-      <Navi1 id={"usedItem"} onClick={GOGO}>
-        마켓
-      </Navi1>
+      <Toolbar>
+        <Navi1 id={"usedItem/"} onClick={GOGO}>
+          마켓
+        </Navi1>
+        <Navi1 id={"usedItem/newProduct"} onClick={GOGO}>
+          판매등록하기
+        </Navi1>
+      </Toolbar>
     </Wrapper>
   );
 }

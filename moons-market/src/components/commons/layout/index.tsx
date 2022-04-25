@@ -1,39 +1,48 @@
-import LayOutBanner from "./banner/index";
 import LayOutFooter from "./footer/index";
 import LayOutHeader from "./header";
 import LayOutNavigation from "./navigation/index";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
 import { useRouter } from "next/router";
+import LayOutMyPageNavigation from "./myPageNavigation";
+import TodayProductPage from "./todayProduct";
+import { useRecoilState } from "recoil";
+import { todayProductState } from "../../../commons/store";
 
 const Body = styled.div`
-  /* height; */
-  width: 100vw;
+  width: 99vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 const LENDING_PAGE = ["/"];
-const HIDDEN_PAGE = ["/", "/login/SignUp", "/login"];
+const MY_PAGE = ["/myPage", "/myPage/basket"];
 
 interface ILayoutProps {
   children: ReactNode;
 }
 export default function LayOut(props: ILayoutProps) {
+  const [todayProduct, setTodayProduct] = useRecoilState(todayProductState);
   const router = useRouter();
-  const isHidden = HIDDEN_PAGE.includes(router.asPath);
+  const isMyPage = MY_PAGE.includes(router.asPath);
   const isLending = LENDING_PAGE.includes(router.asPath);
   return (
-    <>{!isLending &&
-     ( <LayOutHeader />)}
-      {!isHidden && (
+    <>
+      {!isLending && (
         <div>
-          <LayOutBanner />
-          <LayOutNavigation />
+          <LayOutHeader />
+          {isMyPage ? <LayOutMyPageNavigation /> : <LayOutNavigation />}
         </div>
-      )}{" "}
-      <Body>{props.children}</Body>
+      )}
+      <Row>
+        {!isLending && todayProduct[0] && <TodayProductPage />}
+        <Body>{props.children}</Body>
+      </Row>
       <LayOutFooter />
     </>
   );

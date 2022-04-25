@@ -1,9 +1,9 @@
 import * as S from "../productList/productList.styles";
 import InfiniteScroll from "react-infinite-scroller";
-import Button from "@mui/material/Button";
-import CardContent from "@mui/material/CardContent";
+import { IProductListUI } from "./productList.types";
+import { v4 as uuid } from "uuid";
 
-export default function ProductListUI(props) {
+export default function ProductListUI(props: IProductListUI) {
   return (
     <div>
       <S.BackGround>
@@ -14,28 +14,51 @@ export default function ProductListUI(props) {
           hasMore={true}
           useWindow={true}
         >
+          <S.SerchBox>
+            <S.SerchDiv>검색으로 더 쉬워지는 마켓</S.SerchDiv>
+            <S.SearchInput onChange={props.onchangeSearch}></S.SearchInput>
+          </S.SerchBox>
           <S.Contents>
             {props.data?.fetchUseditems.map((el: any) => (
-              <div key={el._id} id={el._id} onClick={props.onClickGoProduct}>
+              <div
+                key={el._id}
+                id={el._id}
+                onClick={props.onClickGoProduct(el)}
+              >
                 <S.MyCard>
-                  <S.CardImage
-                    src={`https://storage.googleapis.com/${el.images[0]}`}
-                  />
+                  {el.images[0] ? (
+                    <S.CardImage
+                      style={{ objectFit: "cover" }}
+                      src={`https://storage.googleapis.com/${el.images[0]}`}
+                    />
+                  ) : (
+                    <S.CardImage
+                      src={"/사진없음.png"}
+                      style={{ objectFit: "cover" }}
+                    />
+                  )}
 
-                  <CardContent>
+                  <S.MyCardContent>
                     <S.ProductName gutterBottom variant="h5">
-                      {el.name}
+                      {el.name
+                        .replace(props.keyWord, `!@#$%${props.keyWord}!@#$%`)
+                        .split("!@#$%")
+                        .map((word: any) => (
+                          <S.SearchWord
+                            key={uuid()}
+                            isMatched={props.keyWord === word}
+                          >
+                            {word}
+                          </S.SearchWord>
+                        ))}
                     </S.ProductName>
                     <S.ProductInfo variant="body2" color="text.secondary">
                       가격 : {el.price}
                       <br />
                       {el.contents}
                     </S.ProductInfo>
-                  </CardContent>
-                  <S.CardButton>
-                    <Button size="small">찜</Button>
-                    <Button size="small">더 알아보기</Button>
-                  </S.CardButton>
+                  </S.MyCardContent>
+                  <S.CardButton></S.CardButton>
                 </S.MyCard>
               </div>
             ))}{" "}

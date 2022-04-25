@@ -1,8 +1,8 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../../commons/store";
+import { accessTokenState, userInfoState } from "../../../../commons/store";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -17,6 +17,18 @@ export const LOGIN_USER = gql`
   mutation loginUser($password: String!, $email: String!) {
     loginUser(password: $password, email: $email) {
       accessToken
+    }
+  }
+`;
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      email
+      name
+      _id
+      userPoint{
+        amount
+      }
     }
   }
 `;
@@ -38,8 +50,9 @@ interface IFormValues {
   password?: string;
 }
 export default function LogInContainer() {
+  const [, setUserInfo] = useRecoilState(userInfoState);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-
+  const client = useApolloClient();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -66,9 +79,23 @@ export default function LogInContainer() {
         const accessToken = result.data?.loginUser.accessToken;
         setAccessToken(accessToken || "");
         localStorage.setItem("accessToken", accessToken || "");
-        console.log(accessToken);
+
+        const resultUserInfo = await client.query({
+          query: FETCH_USER_LOGGED_IN,
+          context: {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          },
+          // 특정 http 요청보낼때 헤더/옵션
+        });
+        const userInfo = resultUserInfo.data.fetchUserLoggedIn;
+        console.log(userInfo);
+        setUserInfo(userInfo);
+        localStorage.setItem("userInfo", JSON.stringify(userInfo) || "");
+
         alert("어서오세요!!");
-        // router.push(`/boards`);
+        router.push(`/usedItem`);
       } catch (error: any) {
         console.log(error);
         alert(error.message);
@@ -77,7 +104,7 @@ export default function LogInContainer() {
   };
 
   const onClickSignUp = () => {
-    router.push(`/login/SignUp`);
+    router.push(`/login/usedItem`);
   };
 
   useEffect(() => {
