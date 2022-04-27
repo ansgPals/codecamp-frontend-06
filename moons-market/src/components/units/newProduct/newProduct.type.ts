@@ -18,6 +18,11 @@ export interface INewProductUIProps {
   EditOk: (editD: any) => Promise<void>;
   onChangeContents: (value: string) => void;
   getValues: UseFormGetValues<FieldValues>;
+  clickPostNumber: (data: any) => void;
+  onModalOpen: () => void;
+  modalOpen: boolean;
+  onClickPostNumber: () => void;
+  add: string;
 }
 
 export interface INewProductContainerProps {

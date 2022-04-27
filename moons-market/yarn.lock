@@ -5791,6 +5791,13 @@ react-daum-postcode@^3.0.1:
     prop-types "^15.7.2"
     react "^17.0.2"
 
+react-daumpost-hook@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-daumpost-hook/-/react-daumpost-hook-1.1.4.tgz#42419cf1187cf9c219131ec032e1f13575ac4f96"
+  integrity sha512-a8JIlveRIRa8JxhJ8RCRxPgEF0Q0k1JAWP0K3aZqQkRn/vETi3+wPGqD8yJV1B8TvFd0JrPEov3QqgGZ+sm9nw==
+  dependencies:
+    react "^17.0.2"
+
 react-dom-factories@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/react-dom-factories/-/react-dom-factories-1.0.2.tgz"

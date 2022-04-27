@@ -7,12 +7,12 @@ import { ReactNode } from "react";
 import { useRouter } from "next/router";
 
 const Body = styled.div`
-  height: 500px;
+  min-height: 500px;
 `;
 
 const LayoutSideBar = styled.div`
   width: 100px;
-  height: 500px;
+  min-height: 500px;
   background-color: orange;
 `;
 

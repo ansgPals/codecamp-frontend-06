@@ -25,6 +25,7 @@ import { FETCH_USED_ITEM_QUESTION_ANSWERS } from "./productCommentListItems";
 // `;
 
 export const FlexWrapper = styled.div`
+  width: fit-content;
   display: flex;
   flex-direction: row;
 `;
@@ -59,7 +60,7 @@ export const ContentsEdit = styled.input`
   /* max-width: 100px; */
 `;
 export const Row = styled.div`
-  width: 48vw;
+  width: 43vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

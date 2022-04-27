@@ -26,7 +26,7 @@ const FETCH_USER_LOGGED_IN = gql`
       email
       name
       _id
-      userPoint{
+      userPoint {
         amount
       }
     }
@@ -67,7 +67,6 @@ export default function LogInContainer() {
   >(LOGIN_USER);
 
   const onClickSubmit = async (data: IFormValues) => {
-    console.log(data);
     if (formState.isValid) {
       try {
         const result = await loginUser({
@@ -90,7 +89,6 @@ export default function LogInContainer() {
           // 특정 http 요청보낼때 헤더/옵션
         });
         const userInfo = resultUserInfo.data.fetchUserLoggedIn;
-        console.log(userInfo);
         setUserInfo(userInfo);
         localStorage.setItem("userInfo", JSON.stringify(userInfo) || "");
 

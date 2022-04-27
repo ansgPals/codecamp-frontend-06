@@ -63,7 +63,7 @@ export const ContentsEdit = styled.input`
   /* max-width: 100px; */
 `;
 export const Row = styled.div`
-  width: 48vw;
+  width: 46.5vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -119,7 +119,20 @@ export const EditButton = styled.button`
   line-height: 5px;
   color: #ababab;
   text-align: end;
-  margin-right: 10px;
+`;
+
+export const CommentNum = styled.button`
+  border: none;
+  background-color: white;
+  height: 30px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  width: 80px;
+  font-size: 17px;
+  line-height: 5px;
+  color: #ababab;
+  text-align: end;
+  /* margin-right: 10px; */
 `;
 export const Back = styled.div`
   width: 100vw;
@@ -136,23 +149,23 @@ export const Col = styled.div`
   align-items: center;
 `;
 export const CreateRow = styled.div`
+  margin-top: 20px;
   width: 50vw;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   border-bottom: 1px solid #c7c7c7;
-  padding-bottom: 20px;
 `;
 
 export const InputBox = styled.input`
   width: 40vw;
-  height: 40px;
+  height: 38px;
   align-items: center;
   border-radius: 16px;
   font-size: 16px;
   padding: 0px 10px;
-  border: #558a65 2px solid;
+  border: 1px solid #c5edcd;
 `;
 
 export interface IButtons {
@@ -167,13 +180,18 @@ export const SignUpButton = styled.button`
   font-size: 20px;
   border: 1px solid #75b582;
   background-color: ${(props: IButtons) =>
-    props.isActive ? "#23b841" : "#75b582"};
-  color: ${(props: IButtons) => (props.isActive ? "white" : "black")};
+    props.isActive ? "#ffffff" : "#e5e5e5"};
+  /* color: ${(props: IButtons) => (props.isActive ? "white" : "black")}; */
   font-weight: bold;
   cursor: pointer;
   :hover {
-    background-color: ${(props: IButtons) =>
-      props.isActive ? "#22cf4d" : "#80ee96"};
+    background-color: #fffcec;
+  }
+`;
+export const ItemBack = styled.div`
+  cursor: pointer;
+  :hover {
+    background-color: #f9fff9;
   }
 `;
 
@@ -268,6 +286,9 @@ export default function ProductCommentListUIItem(props: ICommentListUIProps) {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
+  const onClickCommentDetail = () => {
+    setIsDetail((prev) => !prev);
+  };
 
   const onClickUpdate = () => {
     setIsEdit(true);
@@ -342,7 +363,7 @@ export default function ProductCommentListUIItem(props: ICommentListUIProps) {
       });
       Modal.info({ content: "답변이 등록되었습니다!" });
       setIsEdit(false);
-      reset();
+      reset({ contents: "" });
     } catch (error: any) {
       Modal.error({ content: error.message });
     }
@@ -361,75 +382,93 @@ export default function ProductCommentListUIItem(props: ICommentListUIProps) {
       )}
 
       <ItemWrapper>
-        <FlexWrapper>
-          <Avatar style={{ objectFit: "cover" }} src="/사진없음.png" />
-          <form onSubmit={handleSubmit(onClickEditSubmit)}>
-            <Row>
-              <MainWrapper>
-                <Contents>{props.el?.user.name}</Contents>
+        <ItemBack onClick={onClickCommentDetail}>
+          <FlexWrapper>
+            <Avatar style={{ objectFit: "cover" }} src="/사진없음.png" />
+            <form onSubmit={handleSubmit(onClickEditSubmit)}>
+              <Row>
+                <MainWrapper>
+                  <Contents>{props.el?.user.name}</Contents>
 
-                {isEdit ? (
-                  <>
-                    <ContentsEdit
-                      defaultValue={props.el?.contents}
-                      type="text"
-                      {...register("contents")}
-                    ></ContentsEdit>
-                    <InputErr>{formState.errors.contents?.message}</InputErr>
-                  </>
-                ) : (
-                  <Contents>{props.el?.contents}</Contents>
-                )}
-              </MainWrapper>
-              <OptionWrapper>
-                {props.el.user._id === userInfo._id && (
-                  <>
-                    {isEdit ? (
-                      <>
-                        <EditButton isActive={formState.isValid}>
-                          수정완료
-                        </EditButton>
-                        <DeleteIcon
-                          src="/엑스.png/"
-                          onClick={onClickEditClose}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <EditOpenButton onClick={onClickUpdate}>
-                          수정
-                        </EditOpenButton>
-                        <DeleteIcon
-                          src="/엑스.png/"
-                          onClick={onClickOpenDeleteModal}
-                        />
-                      </>
-                    )}
-                  </>
-                )}
-              </OptionWrapper>
-            </Row>
-          </form>
-        </FlexWrapper>
-        <DateString>{props.el?.createdAt}</DateString> {/* <Back> */}{" "}
-        {answerData?.fetchUseditemQuestionAnswers.map((el: any) => (
-          <QuestionAnswerItems key={el._id} el={el} questionId={props.el._id} />
-        ))}
-        <form onSubmit={handleSubmit(onClickCreateAnswer)}>
-          <CreateRow>
-            <Col>
-              {/* <SubTitle>내용</SubTitle> */}
-              <InputBox
-                placeholder="댓글로 질문을 입력해주세요."
-                type="text"
-                {...register("contents")}
-              ></InputBox>
-              <InputErr>{formState.errors.contents?.message}</InputErr>{" "}
-            </Col>{" "}
-            <SignUpButton isActive={formState.isValid}>답변등록</SignUpButton>
-          </CreateRow>
-        </form>
-        {/* </Back> */}
+                  {isEdit ? (
+                    <>
+                      <ContentsEdit
+                        defaultValue={props.el?.contents}
+                        type="text"
+                        {...register("contents")}
+                      ></ContentsEdit>
+                      <InputErr>{formState.errors.contents?.message}</InputErr>
+                    </>
+                  ) : (
+                    <Contents>{props.el?.contents}</Contents>
+                  )}
+                </MainWrapper>
+                <OptionWrapper>
+                  {props.el.user._id === userInfo._id && (
+                    <>
+                      {isEdit ? (
+                        <>
+                          <EditButton isActive={formState.isValid}>
+                            수정완료
+                          </EditButton>
+                          <DeleteIcon
+                            src="/엑스.png/"
+                            onClick={onClickEditClose}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <EditOpenButton onClick={onClickUpdate}>
+                            수정
+                          </EditOpenButton>
+                          <DeleteIcon
+                            src="/엑스.png/"
+                            onClick={onClickOpenDeleteModal}
+                          />
+                        </>
+                      )}
+                    </>
+                  )}{" "}
+                </OptionWrapper>
+              </Row>
+            </form>{" "}
+          </FlexWrapper>{" "}
+          <DateString>{props.el?.createdAt}</DateString>
+        </ItemBack>
+        {isDetail && (
+          <>
+            {answerData?.fetchUseditemQuestionAnswers.map((el: any) => (
+              <QuestionAnswerItems
+                key={el._id}
+                el={el}
+                questionId={props.el._id}
+              />
+            ))}
+            <form onSubmit={handleSubmit(onClickCreateAnswer)}>
+              <CreateRow>
+                <Col>
+                  {/* <SubTitle>내용</SubTitle> */}
+                  <InputBox
+                    placeholder="댓글로 질문을 입력해주세요."
+                    type="text"
+                    {...register("contents")}
+                  ></InputBox>
+                  <InputErr>{formState.errors.contents?.message}</InputErr>{" "}
+                </Col>{" "}
+                <SignUpButton isActive={formState.isValid}>
+                  답변등록
+                </SignUpButton>
+              </CreateRow>
+            </form>{" "}
+          </>
+        )}{" "}
+        <CommentNum>
+          답변{" "}
+          {answerData?.fetchUseditemQuestionAnswers
+            ? answerData?.fetchUseditemQuestionAnswers.length
+            : 0}
+          개
+        </CommentNum>
       </ItemWrapper>
     </>
   );

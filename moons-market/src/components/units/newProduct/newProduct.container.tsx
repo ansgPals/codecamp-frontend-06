@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 
 import { INewProductContainerProps } from "./newProduct.type";
 import { Modal } from "antd";
+import { kakaoMap } from "../libraries/kakao-map";
 
 const schema = yup.object({
   name: yup.string().required("상품명은 필수 입력 사항입니다."),
@@ -28,7 +29,12 @@ export interface ImyUpdateUseditemInput {
   price?: number;
   contents?: string;
   images?: string[];
+  useditemAddress?: {
+    addressDetail?: string;
+    address?: string;
+  };
 }
+
 export default function NewProductContainer(props: INewProductContainerProps) {
   const {
     register,
@@ -44,6 +50,7 @@ export default function NewProductContainer(props: INewProductContainerProps) {
   });
   const [newId, setNewId] = useState<any>("");
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const [add, setAdd] = useState("서울시 금천구 독산동 953");
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -76,26 +83,33 @@ export default function NewProductContainer(props: INewProductContainerProps) {
     remarks?: string;
     contents?: string;
     price?: number;
+    addressDetail?: string;
   }
   interface IEditValues {
     name?: string;
     remarks?: string;
     contents?: string;
     price?: number;
+    addressDetail?: string;
   }
 
   const PutOk = async (data: IFormValues) => {
     console.log("엘렐레레레" + data.name);
+
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
-            name: data.name,
+            name: String(data.name),
             remarks: data.remarks,
             contents: data.contents,
             price: data.price,
             images: fileUrls,
             tags: ["#아하"],
+            useditemAddress: {
+              addressDetail: data.addressDetail,
+              address: add,
+            },
           },
         },
       });
@@ -114,7 +128,7 @@ export default function NewProductContainer(props: INewProductContainerProps) {
     const isChangedFiles = currentFiles !== defaultFiles;
 
     const myUpdateUseditemInput: ImyUpdateUseditemInput = {};
-    const myVariables = {
+    const myconstiables = {
       useditemId: String(router.query.productId),
       updateUseditemInput: myUpdateUseditemInput,
     };
@@ -123,7 +137,7 @@ export default function NewProductContainer(props: INewProductContainerProps) {
       myUpdateUseditemInput.name = editD.name;
     }
     if (editD.price) {
-      myUpdateUseditemInput.price = editD.price;
+      myUpdateUseditemInput.price = Number(editD.price);
     }
     if (editD.contents) {
       myUpdateUseditemInput.contents = editD.contents;
@@ -134,16 +148,26 @@ export default function NewProductContainer(props: INewProductContainerProps) {
     if (isChangedFiles) {
       myUpdateUseditemInput.images = fileUrls;
     }
+    if (
+      editD.addressDetail ||
+      props.data?.fetchUseditem.useditemAddress.address !== add
+    ) {
+      myUpdateUseditemInput.useditemAddress = {};
+      if (editD.addressDetail)
+        myUpdateUseditemInput.useditemAddress.addressDetail =
+          editD.addressDetail;
+      if (props.data?.fetchUseditem.useditemAddress.address !== add)
+        myUpdateUseditemInput.useditemAddress.address = add;
+    }
     try {
       await updateUseditem({
-        variables: myVariables,
+        variables: myconstiables,
       });
 
       Modal.info({ content: `상품이 수정되었습니다!` });
       router.push(`/usedItem/${router.query.productId}`);
     } catch (error) {
-      console.log(error);
-      alert(error);
+      console.log(editD);
       Modal.error({ content: `${error}` });
     }
   };
@@ -157,22 +181,53 @@ export default function NewProductContainer(props: INewProductContainerProps) {
     if (props.data?.fetchUseditem) {
       reset({ contents: props.data?.fetchUseditem.contents });
     }
+    if (props.data?.fetchUseditem.useditemAddress) {
+      setAdd(props.data?.fetchUseditem.useditemAddress.address);
+    }
   }, [props.data]);
 
+  useEffect(() => {
+    kakaoMap(add);
+  }, [add]);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const onModalOpen = () => {
+    setModalOpen((prev) => !prev);
+  };
+
+  const onClickPostNumber = () => {
+    onModalOpen();
+  };
+
+  const clickPostNumber = (data: any) => {
+    console.log(data);
+    setAdd(data.address);
+
+    onModalOpen();
+  };
+
   return (
-    <NewProductUI
-      Exit={Exit}
-      PutOk={PutOk}
-      onChangeFileUrls={onChangeFileUrls}
-      register={register}
-      handleSubmit={handleSubmit}
-      formState={formState}
-      isEdit={props.isEdit}
-      fileUrls={fileUrls}
-      data={props.data}
-      EditOk={EditOk}
-      onChangeContents={onChangeContents}
-      getValues={getValues}
-    />
+    <>
+      <NewProductUI
+        Exit={Exit}
+        PutOk={PutOk}
+        onChangeFileUrls={onChangeFileUrls}
+        register={register}
+        handleSubmit={handleSubmit}
+        formState={formState}
+        isEdit={props.isEdit}
+        fileUrls={fileUrls}
+        data={props.data}
+        EditOk={EditOk}
+        onChangeContents={onChangeContents}
+        getValues={getValues}
+        onClickPostNumber={onClickPostNumber}
+        onModalOpen={onModalOpen}
+        modalOpen={modalOpen}
+        clickPostNumber={clickPostNumber}
+        add={add}
+      />
+    </>
   );
 }

@@ -18,8 +18,6 @@ const firebaseConfig = {
 };
 export const firebaseApp = initializeApp(firebaseConfig);
 function MyApp({ Component, pageProps }: AppProps) {
-  //모든셋팅
-
   return (
     <RecoilRoot>
       <ApolloSetting>

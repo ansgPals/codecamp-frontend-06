@@ -11,7 +11,6 @@ export const BackGround = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-
   padding: 30px;
   margin-bottom: 30px;
 `;
@@ -140,40 +139,6 @@ export const Editor = styled(ReactQuill)`
 //   border-radius: 15px;
 //   padding-left: 10px;
 // `;
-export const AddBox = styled.div`
-  height: 300px;
-  width: 1000px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-export const AddTop = styled.div`
-  height: 52px;
-  width: 300px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-export const SurchPut = styled.input`
-  font-size: 16px;
-  color: #bdbdbd;
-  border: 1px solid #bdbdbd;
-  width: 77px;
-  height: 52px;
-  margin-top: 12px;
-`;
-export const SurchPush = styled.button`
-  font-size: 16px;
-  color: white;
-  background-color: black;
-  width: 124px;
-  height: 52px;
-  margin-top: 12px;
-  margin-left: 12px;
-`;
 
 export const PhotoBox = styled.div`
   height: 200px;
@@ -207,4 +172,51 @@ export const InBox = styled.button<IPropsInBox>`
   border: 3px solid #69da69;
   cursor: pointer;
   background-color: white;
+`;
+export const AddBox = styled.div`
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: flex-start;
+`;
+
+export const SurchPush = styled.button`
+  font-size: 16px;
+  color: black;
+  border: 3px solid #69da69;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  width: 124px;
+  height: 52px;
+  margin-top: 12px;
+  margin-left: 12px;
+`;
+export const PutAdd = styled.div`
+  font-size: 16px;
+  line-height: 45px;
+  border: 3px solid #ffdb86;
+  width: 450px;
+  height: 52px;
+  margin-top: 12px;
+  border-radius: 15px;
+  padding-left: 10px;
+`;
+export const PutAddDetail = styled.input`
+  font-size: 16px;
+  border: 3px solid #ffdb86;
+  width: 600px;
+  height: 52px;
+  margin-top: 12px;
+  border-radius: 15px;
+  padding-left: 10px;
+`;
+export const Col = styled.div`
+  width: 600px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;

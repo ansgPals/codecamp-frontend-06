@@ -109,6 +109,21 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
           ) : (
             <S.ProductDetailBox></S.ProductDetailBox>
           )}
+          {props.data?.fetchUseditem.useditemAddress?.address[0] && (
+            <>
+              <S.DetailTitle>희망판매위치</S.DetailTitle>
+              <div
+                id="map"
+                style={{
+                  width: "800px",
+                  height: "400px",
+                  marginTop: "20px",
+                  borderRadius: "15px",
+                  marginLeft: "30px",
+                }}
+              ></div>
+            </>
+          )}
         </S.DetailBox>
       </S.Back>
     </>

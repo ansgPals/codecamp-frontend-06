@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../commons/hocs/useAuth";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "../../../commons/store";
@@ -12,6 +12,7 @@ import {
 } from "../../../commons/types/generated/types";
 import { DELETE_USED_ITEM, FETCH_USEDITEM } from "./productDetail.query";
 import ProductDetailUI from "./productDetail.presenter";
+import { kakaoMap } from "../libraries/kakao-map";
 
 export default function ProductDetailContainer() {
   useAuth();
@@ -70,8 +71,8 @@ export default function ProductDetailContainer() {
   const OnClickList = () => {
     router.push("/usedItem");
   };
- 
-  const  OnClickPayment = () => {
+
+  const OnClickPayment = () => {
     router.push(`/usedItem/${router.query.productId}/payment`);
   };
   const OnClickBasket = (el: IBoard) => () => {
@@ -88,6 +89,11 @@ export default function ProductDetailContainer() {
     localStorage.setItem("baskets", JSON.stringify(baskets));
     showBasketModal();
   };
+  useEffect(() => {
+    if (data?.fetchUseditem.useditemAddress.address[0]) {
+      kakaoMap(data?.fetchUseditem.useditemAddress.address);
+    }
+  }, [data]);
   return (
     <ProductDetailUI
       OnClickBasket={OnClickBasket}

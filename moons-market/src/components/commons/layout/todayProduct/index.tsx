@@ -52,15 +52,20 @@ export default function TodayProductPage() {
     setTodayProduct(todayProduct);
   }, []);
   let myTodayProduct = [];
-  if (todayProduct[0]) {
-    myTodayProduct = todayProduct.slice(0, 4);
+  if (todayProduct.length > 4) {
+    myTodayProduct = todayProduct.slice(
+      todayProduct.length - 5,
+      todayProduct.length - 1
+    );
+  } else {
+    myTodayProduct = todayProduct;
   }
 
   const onClickTest = () => {
     localStorage.setItem("todayProduct", JSON.stringify([]));
     setTodayProduct([]);
   };
-  console.log("와랄라" + myTodayProduct);
+
   return (
     <Back>
       <Title>today</Title>

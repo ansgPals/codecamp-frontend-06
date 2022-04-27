@@ -9,6 +9,8 @@ export const Back = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  border-bottom: 1px solid #bdbdbd;
+  margin-bottom: 50px;
 `;
 export const BackGround = styled.div`
   width: 1000px;
@@ -167,6 +169,7 @@ export const DetailTitle = styled.div`
 export const DetailBox = styled.div`
   width: 1000px;
   padding: 50px;
+  padding-bottom: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
