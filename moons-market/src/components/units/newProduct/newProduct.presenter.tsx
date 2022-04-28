@@ -36,6 +36,22 @@ export default function NewProductUI(props: INewProductUIProps) {
               />
               <S.MyErr>{props.formState.errors.remark?.message}</S.MyErr>
             </S.TopRt>
+            <S.MyName>관련태그</S.MyName>
+            <S.PutPass
+              type="text"
+              placeholder="관련태그를 작성해주세요."
+              onKeyUp={props.onKeyUpHash}
+            />
+
+            <S.TagBox>
+              {props.hashArr.map((el, idx) => (
+                <S.Tag key={idx} onClick={props.onClickTag(el)}>
+                  {el}
+                </S.Tag>
+              ))}
+            </S.TagBox>
+
+            <S.MyErr>{props.formState.errors.remark?.message}</S.MyErr>
             <S.MyName>희망판매가격</S.MyName>
             <S.PutTitle
               placeholder="희망판매가격을 작성해주세요.숫자만 작성가능합니다."

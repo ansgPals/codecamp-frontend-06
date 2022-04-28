@@ -52,8 +52,15 @@ export default function LayOutMyPageNavigation() {
         <Navi1 id={"myPage"} onClick={GOGO}>
           마이페이지
         </Navi1>
+
         <Navi2 id={"myPage/basket"} onClick={GOGO}>
           장바구니
+        </Navi2>
+        <Navi2 id={"myPage/zzim"} onClick={GOGO}>
+          찜목록
+        </Navi2>
+        <Navi2 id={"myPage/charge-point"} onClick={GOGO}>
+          충전센터
         </Navi2>
       </Toolbar>
     </Wrapper>

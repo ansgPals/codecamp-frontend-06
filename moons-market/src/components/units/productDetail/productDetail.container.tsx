@@ -10,24 +10,34 @@ import {
   IQuery,
   IQueryFetchUseditemArgs,
 } from "../../../commons/types/generated/types";
-import { DELETE_USED_ITEM, FETCH_USEDITEM } from "./productDetail.query";
+import {
+  DELETE_USED_ITEM,
+  FETCH_USEDITEM,
+  FETCH_USEDITEMS_IPICKED,
+  TOGGLE_USED_ITEM_PISK,
+} from "./productDetail.query";
 import ProductDetailUI from "./productDetail.presenter";
 import { kakaoMap } from "../libraries/kakao-map";
 
 export default function ProductDetailContainer() {
   useAuth();
+  const [pickIdArr, setPickIdArr] = useState([]);
   const [basketModalIsOpen, setBasketModalIsOpen] = useState(false);
   const [deleteIsOpen, setDeleteIsOpen] = useState(false);
-
   const [userInfo] = useRecoilState(userInfoState);
   const [deleteUseditem] = useMutation(DELETE_USED_ITEM);
-  console.log("리코일" + userInfo._id);
+  const [toggleUseditemPick] = useMutation(TOGGLE_USED_ITEM_PISK);
   const router = useRouter();
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
   >(FETCH_USEDITEM, {
     variables: { useditemId: String(router.query.productId) },
+  });
+  const { data: pickData } = useQuery(FETCH_USEDITEMS_IPICKED, {
+    variables: {
+      search: "",
+    },
   });
 
   const DeletetOk = () => {
@@ -39,6 +49,27 @@ export default function ProductDetailContainer() {
       });
       Modal.info({ content: "상품이 삭제되었습니다!!" });
       router.push(`/usedItem`);
+    } catch (error) {
+      alert(error);
+    }
+  };
+  const onClickPick = () => {
+    try {
+      toggleUseditemPick({
+        variables: {
+          useditemId: router.query.productId,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEM,
+            variables: { useditemId: String(router.query.productId) },
+          },
+          {
+            query: FETCH_USEDITEMS_IPICKED,
+            variables: { search: "" },
+          },
+        ],
+      });
     } catch (error) {
       alert(error);
     }
@@ -90,10 +121,15 @@ export default function ProductDetailContainer() {
     showBasketModal();
   };
   useEffect(() => {
-    if (data?.fetchUseditem.useditemAddress.address[0]) {
+    if (data?.fetchUseditem.useditemAddress?.address?.[0]) {
       kakaoMap(data?.fetchUseditem.useditemAddress.address);
     }
-  }, [data]);
+    if (pickData?.fetchUseditemsIPicked) {
+      const pickId = [];
+      pickData.fetchUseditemsIPicked.map((el) => pickId.push(el._id));
+      setPickIdArr(pickId);
+    }
+  }, [data, pickData]);
   return (
     <ProductDetailUI
       OnClickBasket={OnClickBasket}
@@ -109,6 +145,8 @@ export default function ProductDetailContainer() {
       data={data}
       userInfo={userInfo}
       OnClickPayment={OnClickPayment}
+      onClickPick={onClickPick}
+      pickIdArr={pickIdArr}
     />
   );
 }

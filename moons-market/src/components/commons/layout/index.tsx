@@ -21,13 +21,19 @@ const Row = styled.div`
   flex-direction: row;
 `;
 const LENDING_PAGE = ["/"];
-const MY_PAGE = ["/myPage", "/myPage/basket"];
+const MY_PAGE = [
+  "/myPage",
+  "/myPage/basket",
+  "/myPage/zzim",
+  "/myPage/charge-point",
+];
 
 interface ILayoutProps {
   children: ReactNode;
 }
 export default function LayOut(props: ILayoutProps) {
   const [todayProduct, setTodayProduct] = useRecoilState(todayProductState);
+
   const router = useRouter();
   const isMyPage = MY_PAGE.includes(router.asPath);
   const isLending = LENDING_PAGE.includes(router.asPath);

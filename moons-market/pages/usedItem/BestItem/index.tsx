@@ -8,6 +8,7 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { useRecoilState } from "recoil";
 import { todayProductState } from "../../../src/commons/store";
+import DOMPurify from "dompurify";
 
 export const FETCH_USED_ITEM_OF_THE_BEST = gql`
   query fetchUseditemsOfTheBest {
@@ -65,9 +66,9 @@ export const CardImage = styled.img`
 export const ProductName = styled(Typography)`
   height: 50px;
 `;
-export const ProductInfo = styled(Typography)`
-  background-color: azure;
+export const ProductInfo = styled.div`
   height: 70px;
+  font-size: 20px;
 `;
 export const MyCardContent = styled(CardContent)`
   .MuiTypography-root {
@@ -141,10 +142,14 @@ export default function BestProductPage() {
                     <ProductName gutterBottom variant="h5">
                       {el.name}
                     </ProductName>
-                    <ProductInfo variant="body2" color="text.secondary">
+                    <ProductInfo>
                       가격 : {el.price}
                       <br />
-                      내용 : {el.contents}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(el.contents),
+                        }}
+                      ></div>
                     </ProductInfo>
                   </MyCardContent>
                   <CardButton></CardButton>

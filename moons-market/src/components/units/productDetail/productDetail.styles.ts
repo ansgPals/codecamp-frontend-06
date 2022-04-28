@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { HeartOutlined } from "@ant-design/icons";
 
 export const Back = styled.div`
   padding-top: 100px;
@@ -91,7 +92,6 @@ export const Date = styled.div`
 export const ResponseDataBox = styled.div`
   width: 500px;
   min-height: 300px;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -107,7 +107,12 @@ export const TitleBox = styled.div`
 `;
 export const PriceBox = styled.div`
   width: 400px;
+  height: 100px;
   font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
   font-weight: bold;
 `;
 export const ImageBox = styled.div`
@@ -182,4 +187,61 @@ export const ProductDetailBox = styled.div`
   font-size: 25px;
   flex-direction: column;
   justify-content: center;
+`;
+
+export const NoHeartIcon = styled.div`
+  background-image: url("/빈하트.png");
+  margin-left: 30px;
+  height: 60px;
+  width: 60px;
+  background-size: cover;
+  margin-bottom: 10px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 20px;
+  color: black;
+  :hover {
+    background-image: url("/하트.png");
+  }
+  cursor: pointer;
+`;
+export const HeartIcon = styled.div`
+  background-image: url("/하트.png");
+  margin-left: 30px;
+  height: 60px;
+  width: 60px;
+  background-size: cover;
+  margin-bottom: 10px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 20px;
+  color: black;
+  :hover {
+    background-image: url("/빈하트.png");
+  }
+  cursor: pointer;
+`;
+export const TagBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+  margin-right: 20px;
+  width: 480px;
+`;
+export const Tag = styled.div`
+  font-size: 20px;
+  height: 40px;
+  border-radius: 15px;
+  padding: 0px 10px;
+  line-height: 35px;
+  margin-right: 20px;
+  border: orange 1px solid;
+  cursor: pointer;
+`;
+export const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

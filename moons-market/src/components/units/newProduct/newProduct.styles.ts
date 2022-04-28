@@ -220,3 +220,20 @@ export const Col = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+export const TagBox = styled.div`
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+`;
+export const Tag = styled.div`
+  font-size: 20px;
+  height: 40px;
+  border-radius: 15px;
+  padding: 0px 10px;
+  line-height: 35px;
+  margin-right: 20px;
+  border: green 1px solid;
+  cursor: pointer;
+`;

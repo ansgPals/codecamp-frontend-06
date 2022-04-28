@@ -90,10 +90,10 @@ export const CardImage = styled.img`
 `;
 
 export const ProductName = styled(Typography)`
-  height: 30px;
+  min-height: 30px;
 `;
-export const ProductInfo = styled(Typography)`
-  background-color: azure;
+export const ProductInfo = styled.div`
+  font-size: 20px;
   height: 50px;
 `;
 export const CardButton = styled(CardActions)`

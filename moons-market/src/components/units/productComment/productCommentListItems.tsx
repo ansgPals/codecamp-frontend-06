@@ -95,7 +95,6 @@ export const DateString = styled.div`
   padding-bottom: 15px;
   padding-left: 60px;
   color: #bdbdbd;
-  margin-bottom: 10px;
   border-bottom: 2px solid lightgray;
 `;
 
@@ -126,13 +125,10 @@ export const CommentNum = styled.button`
   background-color: white;
   height: 30px;
   margin-left: 20px;
-  margin-bottom: 10px;
   width: 80px;
   font-size: 17px;
-  line-height: 5px;
   color: #ababab;
   text-align: end;
-  /* margin-right: 10px; */
 `;
 export const Back = styled.div`
   width: 100vw;
@@ -373,6 +369,7 @@ export default function ProductCommentListUIItem(props: ICommentListUIProps) {
     <>
       {isOpenDeleteModal && (
         <Modal
+          // animation={false}
           visible={true}
           onOk={onClickDelete}
           onCancel={onClickCloseDeleteModal}

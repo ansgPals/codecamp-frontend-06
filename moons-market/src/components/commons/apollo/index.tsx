@@ -1,5 +1,6 @@
 import {
   accessTokenState,
+  restoreAccessTokenLoadable,
   todayProductState,
   userInfoState,
 } from "../../../commons/store";
@@ -11,7 +12,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { useEffect } from "react";
 import { getAccessToken } from "../../../commons/library/getAccessToken";
 
@@ -19,6 +20,7 @@ export default function ApolloSetting(props: any) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [, setUserInfo] = useRecoilState(userInfoState);
   const [todayProduct, setTodayProduct] = useRecoilState(todayProductState);
+  const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
@@ -42,6 +44,9 @@ export default function ApolloSetting(props: any) {
     const todayProduct = JSON.parse(
       localStorage.getItem("todayProduct") || "{}"
     );
+    restoreAccessToken.toPromise().then((newAccessToken) => {
+      setAccessToken(newAccessToken);
+    });
     setTodayProduct(todayProduct || "");
     setUserInfo(userInfo);
   }, []);

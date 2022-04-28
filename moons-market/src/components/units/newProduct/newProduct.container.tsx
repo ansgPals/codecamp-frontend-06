@@ -33,6 +33,7 @@ export interface ImyUpdateUseditemInput {
     addressDetail?: string;
     address?: string;
   };
+  tags?: string[];
 }
 
 export default function NewProductContainer(props: INewProductContainerProps) {
@@ -51,6 +52,20 @@ export default function NewProductContainer(props: INewProductContainerProps) {
   const [newId, setNewId] = useState<any>("");
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
   const [add, setAdd] = useState("서울시 금천구 독산동 953");
+  const [hashArr, setHashArr] = useState([]);
+  const onKeyUpHash = (event) => {
+    if (event.keyCode === 32 && event.target.value !== " ") {
+      // 스페이스바32 스페이스를 눌렀을때 빈값이 아니면
+      setHashArr([...hashArr, "#" + event.target.value]);
+      event.target.value = "";
+    }
+  };
+  const onClickTag = (el) => () => {
+    const index = hashArr.indexOf(el);
+    const newhashArr = [...hashArr];
+    newhashArr.splice(index, 1);
+    setHashArr(newhashArr);
+  };
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -105,7 +120,7 @@ export default function NewProductContainer(props: INewProductContainerProps) {
             contents: data.contents,
             price: data.price,
             images: fileUrls,
-            tags: ["#아하"],
+            tags: hashArr,
             useditemAddress: {
               addressDetail: data.addressDetail,
               address: add,
@@ -184,6 +199,9 @@ export default function NewProductContainer(props: INewProductContainerProps) {
     if (props.data?.fetchUseditem.useditemAddress) {
       setAdd(props.data?.fetchUseditem.useditemAddress.address);
     }
+    if (props.data?.fetchUseditem.tags) {
+      setHashArr(props.data?.fetchUseditem.tags);
+    }
   }, [props.data]);
 
   useEffect(() => {
@@ -227,6 +245,9 @@ export default function NewProductContainer(props: INewProductContainerProps) {
         modalOpen={modalOpen}
         clickPostNumber={clickPostNumber}
         add={add}
+        onKeyUpHash={onKeyUpHash}
+        hashArr={hashArr}
+        onClickTag={onClickTag}
       />
     </>
   );

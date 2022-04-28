@@ -22,7 +22,7 @@ export const FETCH_USEDITEM = gql`
         name
         picture
       }
-
+      pickedCount
       createdAt
 
       createdAt
@@ -32,5 +32,19 @@ export const FETCH_USEDITEM = gql`
 export const DELETE_USED_ITEM = gql`
   mutation deleteUseditem($useditemId: ID!) {
     deleteUseditem(useditemId: $useditemId)
+  }
+`;
+export const TOGGLE_USED_ITEM_PISK = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
+  }
+`;
+
+export const FETCH_USEDITEMS_IPICKED = gql`
+  query fetchUseditemsIPicked($search: String) {
+    fetchUseditemsIPicked(search: $search) {
+      _id
+      name
+    }
   }
 `;

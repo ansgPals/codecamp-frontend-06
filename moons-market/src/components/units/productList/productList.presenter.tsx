@@ -2,6 +2,7 @@ import * as S from "../productList/productList.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { IProductListUI } from "./productList.types";
 import { v4 as uuid } from "uuid";
+import DOMPurify from "dompurify";
 
 export default function ProductListUI(props: IProductListUI) {
   return (
@@ -52,10 +53,14 @@ export default function ProductListUI(props: IProductListUI) {
                           </S.SearchWord>
                         ))}
                     </S.ProductName>
-                    <S.ProductInfo variant="body2" color="text.secondary">
+                    <S.ProductInfo>
                       가격 : {el.price}
                       <br />
-                      {el.contents}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(el.contents),
+                        }}
+                      ></div>
                     </S.ProductInfo>
                   </S.MyCardContent>
                   <S.CardButton></S.CardButton>

@@ -3,6 +3,7 @@ import { Button, Modal } from "antd";
 import * as S from "../productDetail/productDetail.styles";
 import { getDate } from "../libraries/util";
 import { IProductDeatilUIProps } from "./productDetail.types";
+
 export default function ProductDetailUI(props: IProductDeatilUIProps) {
   return (
     <>
@@ -40,16 +41,24 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
       </Modal>
       <S.Back>
         <S.BackGround>
-          <S.LeftBody>
-            {props.data?.fetchUseditem.images[0] ? (
-              <S.IMG
-                style={{ objectFit: "cover" }}
-                src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
-              />
-            ) : (
-              <S.IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
-            )}
-          </S.LeftBody>
+          <S.Left>
+            <S.LeftBody>
+              {props.data?.fetchUseditem.images[0] ? (
+                <S.IMG
+                  style={{ objectFit: "cover" }}
+                  src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
+                />
+              ) : (
+                <S.IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
+              )}
+            </S.LeftBody>{" "}
+            <S.TagBox>
+              {props.data?.fetchUseditem.tags.map((el, idx) => (
+                <S.Tag key={idx}>{el}</S.Tag>
+              ))}
+            </S.TagBox>
+          </S.Left>
+          <></>
           <S.RightBody>
             <S.ResponseDataBox>
               <S.TopBack>
@@ -66,7 +75,23 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
               <S.TitleBox>{props.data?.fetchUseditem.name}</S.TitleBox>
               <S.RemarkBox>{props.data?.fetchUseditem.remarks}</S.RemarkBox>
             </S.ResponseDataBox>
-            <S.PriceBox> 판매가 {props.data?.fetchUseditem.price}원</S.PriceBox>
+
+            {props.pickIdArr.includes(props.data?.fetchUseditem._id) ? (
+              <S.PriceBox>
+                판매가 {props.data?.fetchUseditem.price}원{" "}
+                <S.HeartIcon onClick={props.onClickPick}>
+                  {props.data?.fetchUseditem?.pickedCount}
+                </S.HeartIcon>
+              </S.PriceBox>
+            ) : (
+              <S.PriceBox>
+                판매가 {props.data?.fetchUseditem.price}원{" "}
+                <S.NoHeartIcon onClick={props.onClickPick}>
+                  {props.data?.fetchUseditem?.pickedCount}
+                </S.NoHeartIcon>
+              </S.PriceBox>
+            )}
+
             <S.ProductButtonBox>
               {props.userInfo._id === props.data?.fetchUseditem.seller._id ? (
                 <>
@@ -109,7 +134,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
           ) : (
             <S.ProductDetailBox></S.ProductDetailBox>
           )}
-          {props.data?.fetchUseditem.useditemAddress?.address[0] && (
+          {props.data?.fetchUseditem.useditemAddress?.address?.[0] && (
             <>
               <S.DetailTitle>희망판매위치</S.DetailTitle>
               <div
