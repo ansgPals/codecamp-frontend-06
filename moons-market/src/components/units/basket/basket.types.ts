@@ -12,4 +12,9 @@ export interface IBasketItem {
 }
 export interface IBasketItemProps {
   el: IBasketItem;
+  buyingMoney: number
+  setBuyingMoney: any
+  buyingList:[]
+  setBuyingList:any
 }
+

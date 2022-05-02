@@ -3,6 +3,7 @@ import { Button, Modal } from "antd";
 import * as S from "../productDetail/productDetail.styles";
 import { getDate } from "../libraries/util";
 import { IProductDeatilUIProps } from "./productDetail.types";
+import { v4 as uuid } from "uuid";
 
 export default function ProductDetailUI(props: IProductDeatilUIProps) {
   return (
@@ -54,7 +55,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
             </S.LeftBody>{" "}
             <S.TagBox>
               {props.data?.fetchUseditem.tags.map((el, idx) => (
-                <S.Tag key={idx}>{el}</S.Tag>
+                <S.Tag key={uuid()}>{el}</S.Tag>
               ))}
             </S.TagBox>
           </S.Left>
@@ -120,9 +121,9 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
           <S.DetailTitle>제품상세</S.DetailTitle>
           <S.ImageBox>
             {props.data?.fetchUseditem.images
-              ?.filter((el: any) => el)
-              .map((el: any) => (
-                <S.IMG key={el} src={`https://storage.googleapis.com/${el}`} />
+              ?.filter((aa: any) => aa)
+              .map((aa: any,idx) => (
+                <S.IMG key={uuid()} src={`https://storage.googleapis.com/${aa}`} />
               ))}
           </S.ImageBox>
           {typeof window !== "undefined" ? (

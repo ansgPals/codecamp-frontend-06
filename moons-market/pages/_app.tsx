@@ -8,6 +8,7 @@ import { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 import ApolloSetting from "../src/components/commons/apollo";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyA_hTqQide8Md0Up5qDhy_BVCx7tzGCP6o",
   authDomain: "ansgpals.firebaseapp.com",
@@ -18,9 +19,11 @@ const firebaseConfig = {
 };
 export const firebaseApp = initializeApp(firebaseConfig);
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <RecoilRoot>
       <ApolloSetting>
+
         <LayOut>
           <Component {...pageProps} />
         </LayOut>
