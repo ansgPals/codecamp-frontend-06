@@ -1,21 +1,44 @@
 import { gql, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 
-
+export const BackGround = styled.div`
+  width: 1200px;
+  height: 500px;
+border: 1px solid #BDBDBD;
+margin: 100px;
+border-radius: 15px;
+`
 export const Wrapper = styled.div`
-  max-width: 1200px;
-  min-width: 800px;
-  width: 60vw;
+height: 300px;
+  width: 1200px;
   border-bottom: 1px solid #e8e7e7;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 20px;
-  padding-bottom: 20px;
   font-size: 50px;
-  margin-top: 100px;
+
 `;
+export const ProfileBack = styled.div`
+  height: 300px;
+  width: 300px;
+  background-image: url('/동글.png');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+export const ProfileImageBox=styled.div`
+  height: 200px;
+  width: 200px;
+  border-radius: 150px;
+  background-image: url('/사진없음.png');
+  background-size: cover;
+`
+export const ProfileImage=styled.image`
+  object-fit: cover;
+`
 export const PaymentButton = styled.button``;
 const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
@@ -37,14 +60,19 @@ export default function MyPage() {
 
   return (
     <>
+    <BackGround>
       <Wrapper>
-        내포인트 :
+<ProfileBack><ProfileImageBox>
+  <ProfileImage src={`https://storage.googleapis.com/${ data?.fetchUserLoggedIn.picture}`} />
+  </ProfileImageBox></ProfileBack>
+
+      </Wrapper>
+      <PaymentButton >        내포인트 :
         {data?.fetchUserLoggedIn.userPoint.amount
           ? data?.fetchUserLoggedIn.userPoint.amount
           : 0}
-        원
-      </Wrapper>
-      <PaymentButton >결제하기</PaymentButton>
+        원결제하기</PaymentButton>
+      </BackGround>
     </>
   );
 }
