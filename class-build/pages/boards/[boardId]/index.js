@@ -30,7 +30,7 @@ const FETCH_BOARD = gql`
   }
 `;
 // 이페이지는 서버사이드 랜더링 할랭
-export const getSeverSideProps = async () => {
+export const getServerSideProps = async () => {
   // 데이터 요청 할 것! 아폴로셋팅 안된상태니까 아폴로셋팅 리퀘스트!
   // const {data}=useQuery(FETCH_BOARD)
   // 이건안됨
