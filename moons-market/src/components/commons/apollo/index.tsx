@@ -21,6 +21,7 @@ export default function ApolloSetting(props: any) {
   const [, setUserInfo] = useRecoilState(userInfoState);
   const [todayProduct, setTodayProduct] = useRecoilState(todayProductState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
+
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
@@ -44,9 +45,12 @@ export default function ApolloSetting(props: any) {
     const todayProduct = JSON.parse(
       localStorage.getItem("todayProduct") || "{}"
     );
+
     restoreAccessToken.toPromise().then((newAccessToken) => {
       setAccessToken(newAccessToken);
     });
+
+    
     setTodayProduct(todayProduct || "");
     setUserInfo(userInfo);
   }, []);

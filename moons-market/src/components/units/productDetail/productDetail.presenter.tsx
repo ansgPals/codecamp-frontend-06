@@ -50,7 +50,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
                   src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
                 />
               ) : (
-                <S.IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
+                <S.IMG style={{ objectFit: "cover" backgroundColor}} src={"/사진없음.png"} />
               )}
             </S.LeftBody>{" "}
             <S.TagBox>
