@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Head } from "next/head";
+import Head from "next/head";
 import { gql, request } from "graphql-request";
 
 export default function BardDetailPage(props) {
@@ -20,6 +20,7 @@ export default function BardDetailPage(props) {
     </div>
   );
 }
+
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
@@ -29,6 +30,7 @@ const FETCH_BOARD = gql`
     }
   }
 `;
+
 // 이페이지는 서버사이드 랜더링 할랭
 export const getServerSideProps = async (context) => {
   // 데이터 요청 할 것! 아폴로셋팅 안된상태니까 아폴로셋팅 리퀘스트!
