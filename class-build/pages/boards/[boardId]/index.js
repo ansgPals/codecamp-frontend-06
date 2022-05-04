@@ -14,7 +14,7 @@ export default function BardDetailPage(props) {
 
       <div>
         안녕하세요 게시글 상세 페이지 입니다.게시글 아이디는
-        {router.query.boardID}
+        {router.query.boardId}
         입니다.
       </div>
     </div>
