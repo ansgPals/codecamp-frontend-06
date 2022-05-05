@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <LayOut>
           <Component {...pageProps} />
         </LayOut>
+        
       </ApolloSetting>
     </RecoilRoot>
   );

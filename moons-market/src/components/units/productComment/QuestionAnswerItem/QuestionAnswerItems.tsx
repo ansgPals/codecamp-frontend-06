@@ -6,14 +6,14 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "../../../commons/store";
+import { userInfoState } from "../../../../commons/store";
 import * as yup from "yup";
 import {
   IMutation,
   IMutationUpdateUseditemQuestionAnswerArgs,
   IUseditemQuestion,
-} from "../../../commons/types/generated/types";
-import { FETCH_USED_ITEM_QUESTION_ANSWERS } from "./productCommentListItems";
+} from "../../../../commons/types/generated/types";
+import { FETCH_USED_ITEM_QUESTION_ANSWERS } from "../ProductCommentList/CommentListItem/productCommentListItems";
 
 // export const ItemWrapper = styled.div`
 //   width: 50vw;

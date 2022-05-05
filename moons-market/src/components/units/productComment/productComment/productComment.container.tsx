@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { FETCH_USED_ITEM_QUESTIONS } from "./productCommentList.container";
+import { FETCH_USED_ITEM_QUESTIONS } from "../ProductCommentList/productCommentList.container";
 export const Back = styled.div`
   width: 100vw;
   display: flex;
@@ -30,13 +30,6 @@ export const Row = styled.div`
   padding-bottom: 20px;
 `;
 
-// export const SubTitle = styled.div`
-//   padding: 0px 10px;
-//   width: 384px;
-//   height: 25px;
-//   align-items: center;
-//   font-size: 16px;
-// `;
 export const InputBox = styled.input`
   width: 40vw;
   height: 64px;

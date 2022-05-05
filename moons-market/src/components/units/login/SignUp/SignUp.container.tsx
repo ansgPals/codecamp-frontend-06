@@ -9,6 +9,7 @@ import {
   IMutationCreateUserArgs,
 } from "../../../../commons/types/generated/types";
 import SignUpPresenter from "./SignUp.presenter";
+import { IFormValues } from "./SignUp.types";
 
 export const CREATE_USER = gql`
   mutation createUser($createUserInput: CreateUserInput!) {
@@ -31,12 +32,7 @@ const schema = yup.object({
     .string()
     .oneOf([yup.ref("password"), null], "비밀번호를 확인해주세요!"),
 });
-interface IFormValues {
-  email?: string;
-  password?: string;
-  passwordOk?: string;
-  name?: string;
-}
+
 
 export default function SignUpContainer() {
   const router = useRouter();

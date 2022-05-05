@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { IButtonProps } from "./SignUp.presenter";
+import { IButtonProps } from "./SignUp.types";
+
 
 export const Back = styled.div`
   padding: 100px;

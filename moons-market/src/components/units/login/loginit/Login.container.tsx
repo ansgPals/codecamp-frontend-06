@@ -12,6 +12,7 @@ import {
   IMutationLoginUserArgs,
 } from "../../../../commons/types/generated/types";
 import LogInPresenter from "./Login.presenter";
+import { IFormValues } from "./Login.types";
 
 export const LOGIN_USER = gql`
   mutation loginUser($password: String!, $email: String!) {
@@ -45,10 +46,7 @@ const schema = yup.object({
     .max(15, "비밀번호는 최대 15자리로 입력해주세요"),
 });
 
-interface IFormValues {
-  email?: string;
-  password?: string;
-}
+
 export default function LogInContainer() {
   const [, setUserInfo] = useRecoilState(userInfoState);
   const [, setAccessToken] = useRecoilState(accessTokenState);

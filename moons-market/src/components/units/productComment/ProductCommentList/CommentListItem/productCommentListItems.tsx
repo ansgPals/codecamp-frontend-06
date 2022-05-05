@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "../../../commons/store";
+import { userInfoState } from "../../../../../commons/store";
 import * as yup from "yup";
 import {
   IMutation,
@@ -15,9 +15,9 @@ import {
   IQuery,
   IQueryFetchUseditemQuestionAnswersArgs,
   IUseditemQuestion,
-} from "../../../commons/types/generated/types";
-import { FETCH_USED_ITEM_QUESTIONS } from "./productCommentList.container";
-import QuestionAnswerItems from "./QuestionAnswerItems";
+} from "../../../../../commons/types/generated/types";
+import { FETCH_USED_ITEM_QUESTIONS } from "../productCommentList.container";
+import QuestionAnswerItems from "../../QuestionAnswerItem/QuestionAnswerItems";
 
 export const ItemWrapper = styled.div`
   width: 50vw;

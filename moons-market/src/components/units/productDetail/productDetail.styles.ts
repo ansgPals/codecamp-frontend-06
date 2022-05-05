@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { HeartOutlined } from "@ant-design/icons";
 
 export const Back = styled.div`
   padding-top: 100px;

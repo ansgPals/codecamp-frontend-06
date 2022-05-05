@@ -5,8 +5,8 @@ import InfiniteScroll from "react-infinite-scroller";
 import {
   IQuery,
   IQueryFetchUseditemQuestionsArgs,
-} from "../../../commons/types/generated/types";
-import ProductCommentListUIItem from "./productCommentListItems";
+} from "../../../../commons/types/generated/types";
+import ProductCommentListUIItem from "./CommentListItem/productCommentListItems";
 
 export const FETCH_USED_ITEM_QUESTIONS = gql`
   query fetchUseditemQuestions($page: Int, $useditemId: ID!) {

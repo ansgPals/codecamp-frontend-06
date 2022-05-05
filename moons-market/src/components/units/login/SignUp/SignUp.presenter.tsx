@@ -1,16 +1,8 @@
-import { FieldValues, FormState, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 import * as S from "../SignUp/SignUp.styles";
+import { ISignUpPropsUI } from "./SignUp.types";
 
-interface ISignUpPropsUI {
-  inputRef: any;
-  onClickSignUp: (data: any) => Promise<void>
-  register: UseFormRegister<FieldValues>
-  formState: FormState<FieldValues>
- handleSubmit: UseFormHandleSubmit<FieldValues>
-}
-export interface IButtonProps {
-  isActive: boolean;
-}
+
+
 
 export default function SignUpPresenter(props: ISignUpPropsUI) {
   return (

@@ -1,26 +1,7 @@
-import {
-  FieldValues,
-  FormState,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from "react-hook-form";
-import * as S from "./Login.styles";
-interface IFormValues {
-  email?: string;
-  password?: string;
-}
-interface ILogInPropsUI {
-  inputRef: any;
 
-  onClickSignUp: () => void;
-  register: UseFormRegister<FieldValues>;
-  handleSubmit: UseFormHandleSubmit<FieldValues>;
-  formState: FormState<FieldValues>;
-  onClickSubmit: (data: IFormValues) => void;
-}
-export interface IButtonProps {
-  isActive: boolean;
-}
+import * as S from "./Login.styles";
+import { ILogInPropsUI } from "./Login.types";
+
 
 export default function LogInPresenter(props: ILogInPropsUI) {
   return (

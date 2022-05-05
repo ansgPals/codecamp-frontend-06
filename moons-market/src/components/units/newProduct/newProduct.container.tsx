@@ -12,7 +12,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_USEDITEM, UPDATE_USEDITEM } from "./newProduct.query";
 import { useRouter } from "next/router";
 
-import { INewProductContainerProps } from "./newProduct.type";
+import { IEditValues, IFormValues, ImyUpdateUseditemInput, INewProductContainerProps } from "./newProduct.type";
 import { Modal } from "antd";
 import { kakaoMap } from "../libraries/kakao-map";
 
@@ -23,18 +23,6 @@ const schema = yup.object({
   price: yup.number().required("가격은 필수 입력 사항입니다."),
 });
 
-export interface ImyUpdateUseditemInput {
-  name?: string;
-  remarks?: string;
-  price?: number;
-  contents?: string;
-  images?: string[];
-  useditemAddress?: {
-    addressDetail?: string;
-    address?: string;
-  };
-  tags?: string[];
-}
 
 export default function NewProductContainer(props: INewProductContainerProps) {
   const {
@@ -60,7 +48,7 @@ export default function NewProductContainer(props: INewProductContainerProps) {
       event.target.value = "";
     }
   };
-  const onClickTag = (el) => () => {
+  const onClickTag = (el:string) => () => {
     const index = hashArr.indexOf(el);
     const newhashArr = [...hashArr];
     newhashArr.splice(index, 1);
@@ -93,20 +81,7 @@ export default function NewProductContainer(props: INewProductContainerProps) {
     // onChange 됐다고 react-hook-form에 알려주는 기능
     trigger("contents");
   };
-  interface IFormValues {
-    name?: string;
-    remarks?: string;
-    contents?: string;
-    price?: number;
-    addressDetail?: string;
-  }
-  interface IEditValues {
-    name?: string;
-    remarks?: string;
-    contents?: string;
-    price?: number;
-    addressDetail?: string;
-  }
+
 
   const PutOk = async (data: IFormValues) => {
     console.log("엘렐레레레" + data.name);
