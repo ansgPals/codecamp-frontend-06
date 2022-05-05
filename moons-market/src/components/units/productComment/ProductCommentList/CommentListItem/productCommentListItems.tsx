@@ -109,7 +109,10 @@ export const EditOpenButton = styled.button`
   text-align: end;
   margin-right: 10px;
 `;
-export const EditButton = styled.button`
+interface IPropsInBox {
+  isActive?: boolean;
+}
+export const EditButton = styled.button<IPropsInBox>`
   border: none;
   background-color: white;
   cursor: pointer;

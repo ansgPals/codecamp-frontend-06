@@ -2,7 +2,6 @@ import { gql, useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Modal } from "antd";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
@@ -107,7 +106,10 @@ export const EditOpenButton = styled.button`
   text-align: end;
   margin-right: 10px;
 `;
-export const EditButton = styled.button`
+interface IPropsInBox {
+  isActive?: boolean;
+}
+export const EditButton = styled.button<IPropsInBox>`
   border: none;
   background-color: white;
   cursor: pointer;

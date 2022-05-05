@@ -1,6 +1,5 @@
 import { gql, OperationVariables, useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
-import { async } from "@firebase/util";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import {

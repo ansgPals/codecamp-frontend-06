@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export default function HashTagPage() {
-  const [hashTag, setHashTag] = useState("");
   const [hashArr, setHashArr] = useState([]);
   const onKeyUpHash = (event) => {
     if (event.keyCode === 32 && event.target.value !== " ") {

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Modal } from "antd";
 
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   IMutation,
   IMutationUploadFileArgs,
@@ -158,15 +158,16 @@ export default function ProfileEditPage() {
   const [nameErr, setNameErr] = useState("");
 
   const [imgUrl, setImgUrl] = useState("");
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<File | undefined>();
 
   const onClickUpload = () => {
     fileRef.current?.click();
   };
 
-  const onChangfile = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangfile = (event) => {
     const file = checkValidationImage(event.target.files?.[0]);
     console.log(file);
+
     if (!file) {
       alert("파일이 없습니다.");
       return;

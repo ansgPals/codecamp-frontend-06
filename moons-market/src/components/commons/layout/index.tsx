@@ -32,7 +32,7 @@ interface ILayoutProps {
   children: ReactNode;
 }
 export default function LayOut(props: ILayoutProps) {
-  const [todayProduct, setTodayProduct] = useRecoilState(todayProductState);
+  const [todayProduct] = useRecoilState(todayProductState);
 
   const router = useRouter();
   const isMyPage = MY_PAGE.includes(router.asPath);

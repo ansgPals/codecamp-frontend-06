@@ -19,7 +19,7 @@ import { getAccessToken } from "../../../commons/library/getAccessToken";
 export default function ApolloSetting(props: any) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [, setUserInfo] = useRecoilState(userInfoState);
-  const [todayProduct, setTodayProduct] = useRecoilState(todayProductState);
+  const [, setTodayProduct] = useRecoilState(todayProductState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
@@ -50,7 +50,6 @@ export default function ApolloSetting(props: any) {
       setAccessToken(newAccessToken);
     });
 
-    
     setTodayProduct(todayProduct || "");
     setUserInfo(userInfo);
   }, []);

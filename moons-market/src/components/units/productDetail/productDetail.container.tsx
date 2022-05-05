@@ -39,7 +39,9 @@ export default function ProductDetailContainer() {
       search: "",
     },
   });
-  (() => { console.warn = console.error = () => {}} )();
+  (() => {
+    console.warn = console.error = () => {};
+  })();
   const DeletetOk = () => {
     try {
       deleteUseditem({

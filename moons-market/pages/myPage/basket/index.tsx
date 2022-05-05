@@ -1,4 +1,3 @@
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { gql, OperationVariables, useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Modal } from "antd";
@@ -120,7 +119,6 @@ export default function MyBasketPage() {
   const [createPointTransactionOfBuyingAndSelling] = useMutation(
     CREATE_POINT_TRANSATION_OF_BUYING_AND_SELLING
   );
-  const [Allcheck, setAllCheck] = useState(true);
   const [basketItems, setBasketItems] = useState([]);
   const router = useRouter();
   const [buyingList, setBuyingList] = useState([]);
@@ -131,6 +129,7 @@ export default function MyBasketPage() {
 
     let newBuyingMoney = 0;
     const buyingList = [];
+    // eslint-disable-next-line array-callback-return
     baskets.map((el: any) => {
       newBuyingMoney += el.price;
       buyingList.push(el._id);
@@ -142,10 +141,6 @@ export default function MyBasketPage() {
     };
     setting();
   }, []);
-
-  const onChangeCheck = () => {
-    setAllCheck((prev) => !prev);
-  };
 
   const onClickPayment = async () => {
     if (userData?.fetchUserLoggedIn.userPoint.amount - buyingMoney < 0) {

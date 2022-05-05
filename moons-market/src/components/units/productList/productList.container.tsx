@@ -12,7 +12,7 @@ import ProductListUI from "./productList.presenter";
 import { FETCH_USEDITEMS } from "./productList.quries";
 
 export default function ProductListContainer() {
-  const [todayProduct, setTodayProduct] = useRecoilState(todayProductState);
+  const [, setTodayProduct] = useRecoilState(todayProductState);
   const [keyword, setkeyword] = useState("");
   const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchUseditems">,

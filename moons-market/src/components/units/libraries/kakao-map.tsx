@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 declare const window: typeof globalThis & {
   kakao: any;
 };

@@ -1,4 +1,3 @@
-
 import { IQuery } from "../../../commons/types/generated/types";
 
 export interface IProductDeatilUIProps {
@@ -13,9 +12,11 @@ export interface IProductDeatilUIProps {
   deleteIsOpen: boolean;
   basketModalIsOpen: boolean;
   data: Pick<IQuery, "fetchUseditem">;
+  onClickPick: () => void;
   userInfo: {
     _id: string;
     name: string;
   };
-  OnClickPayment:()=>void
+  OnClickPayment: () => void;
+  pickIdArr: string[];
 }

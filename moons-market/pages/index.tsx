@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import styles from "../styles/Home.module.css";
 
 const Main = styled.div`
   height: 90vh;
