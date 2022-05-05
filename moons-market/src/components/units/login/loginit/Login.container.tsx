@@ -76,7 +76,7 @@ export default function LogInContainer() {
         const accessToken = result.data?.loginUser.accessToken;
         setAccessToken(accessToken || "");
         localStorage.setItem("accessToken", accessToken || "");
-
+console.log('로그인은됨')
         const resultUserInfo = await client.query({
           query: FETCH_USER_LOGGED_IN,
           context: {
