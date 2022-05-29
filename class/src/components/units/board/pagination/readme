@@ -1,0 +1,9 @@
+import PagiNationComponent from "../../src/components/commons/pagination/pagination.container";
+
+export default function PaginationTestPage() {
+  return <PagiNationComponent refetch={1} dataCount={500} />;
+}
+
+dataCount : 총 결제정보/ 강좌정보/ 수강후기 의 갯수 (number)
+refetch : refetch 기능 프롭스
+위 두가지 필수사항입니다.

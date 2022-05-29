@@ -19,7 +19,7 @@ const LayoutSideBar = styled.div`
 const BodyWapper = styled.div`
   display: flex;
 `;
-const HIDDEN_HEADERS = ["/12-05-modal-refactoring"];
+const HIDDEN_HEADERS = ["/0000/carousel2"];
 
 interface ILayoutProps {
   children: ReactNode;
@@ -33,15 +33,22 @@ export default function LayOut(props: ILayoutProps) {
 
   return (
     <>
-      {!isHIDDEN && <LayOutHeader />}
-      {/* 해당주소가있으면 트루를 반환함. 그걸 느낌표붙혀서 펄스로 바꾼후 진행~ */}
-      <LayOutBanner />
-      <LayOutNavigation />
-      <BodyWapper>
-        <LayoutSideBar>여기는 사이드바입니다.!</LayoutSideBar>
-        <Body>{props.children}</Body>
-      </BodyWapper>
-      <LayOutFooter />
+      {!isHIDDEN && (
+        <>
+          {" "}
+          <LayOutHeader />
+          /* 해당주소가있으면 트루를 반환함. 그걸 느낌표붙혀서 펄스로 바꾼후
+          진행~ */
+          <LayOutBanner />
+          <LayOutNavigation />
+          <BodyWapper>
+            <LayoutSideBar>여기는 사이드바입니다.!</LayoutSideBar>
+            <Body>{props.children}</Body>
+          </BodyWapper>
+          <LayOutFooter />
+        </>
+      )}
+      {isHIDDEN && <Body>{props.children}</Body>}
     </>
   );
 }
