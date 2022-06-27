@@ -114,7 +114,7 @@ export default function ChargePointPage() {
         buyer_tel: "010-4242-4242",
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181",
-        m_redirect_url: `http://localhost:3000/myPage/charge-point`,
+        m_redirect_url: `https://moonsportfolio.shop//myPage/charge-point`,
       },
       async (rsp: any) => {
         // callback

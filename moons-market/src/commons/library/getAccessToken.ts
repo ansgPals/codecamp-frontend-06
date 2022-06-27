@@ -11,7 +11,7 @@ const RESTORE_ACCESS_TOKEN = gql`
 export async function getAccessToken() {
   try {
     const graphQLClient = new GraphQLClient(
-      "https://backend06.codebootcamp.co.kr/graphql",
+      "https://backend06.codebootcamp.co.kr/graphql30",
       { credentials: "include" }
       // 쿠키도 보내주겠다
     );
