@@ -68,7 +68,7 @@ export default function Home() {
         <SubTitle>우리의 바람을 담은 중고물품거래의 새로운바람!</SubTitle>
       </TitleBox>
       <BodyBox>
-        <Start onClick={onClickInit}> 시작하기 </Start>
+        <Start onClick={onClickInit}> 입장하기 </Start>
       </BodyBox>
     </Main>
   );
