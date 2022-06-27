@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 const Main = styled.div`
   height: 90vh;
   width: 100vw;
-  background-image: url("/랜딩.webp");
+  background-image: url("/랜딩.png");
   background-size: cover;
   display: flex;
   flex-direction: column;

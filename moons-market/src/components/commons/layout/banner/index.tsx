@@ -18,7 +18,7 @@ const MyBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("/랜딩.webp");
+  background-image: url("/랜딩.png");
   background-size: cover;
 `;
 const CarouselBox = styled.div`
