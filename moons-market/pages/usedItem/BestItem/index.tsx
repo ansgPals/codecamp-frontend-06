@@ -134,7 +134,7 @@ export default function BestProductPage() {
                     />
                   ) : (
                     <CardImage
-                      src={"/사진없음.png"}
+                      src={"/noimg.png"}
                       style={{ objectFit: "cover" }}
                     />
                   )}

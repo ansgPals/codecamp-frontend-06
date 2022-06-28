@@ -39,7 +39,7 @@ export const ProfileBack = styled.div`
   margin-left: 200px;
   height: 300px;
   width: 300px;
-  background-image: url("/동글.png");
+  background-image: url("/circle.png");
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -239,7 +239,7 @@ export default function ProfileEditPage() {
                 {imgUrl.length ? (
                   <ProfileImage src={imgUrl} />
                 ) : (
-                  <ProfileImage src={"/사진없음.png"} />
+                  <ProfileImage src={"/noimg.png"} />
                 )}
               </ProfileImageBox>
             </ProfileBack>

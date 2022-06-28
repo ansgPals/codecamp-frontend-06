@@ -284,7 +284,7 @@ export default function MyBasketPage() {
                     src={`https://storage.googleapis.com/${data?.fetchUseditem.images[0]}`}
                   />
                 ) : (
-                  <IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
+                  <IMG style={{ objectFit: "cover" }} src={"/noimg.png"} />
                 )}
               </ImgBody>
               <ProductCol onClick={onClickProduct}>

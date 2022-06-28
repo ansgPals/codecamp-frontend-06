@@ -49,7 +49,7 @@ export const EditButton = styled.button`
 `;
 export const DeleteButton = styled.button`
   margin-right: 15px;
-  background-image: url("/freeboard/엑스.png");
+  background-image: url("/freeboard/nono.png");
   background-size: cover;
   background-color: white;
   width: 18px;
@@ -59,7 +59,7 @@ export const DeleteButton = styled.button`
 `;
 export const DeleteButton2 = styled.button`
   margin-right: 15px;
-  background-image: url("/freeboard/엑스.png");
+  background-image: url("/freeboard/nono.png");
   background-size: cover;
   width: 20px;
   height: 20px;

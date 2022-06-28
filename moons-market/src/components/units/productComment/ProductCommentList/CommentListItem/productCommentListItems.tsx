@@ -384,7 +384,7 @@ export default function ProductCommentListUIItem(props: ICommentListUIProps) {
       <ItemWrapper>
         <ItemBack onClick={onClickCommentDetail}>
           <FlexWrapper>
-            <Avatar style={{ objectFit: "cover" }} src="/사진없음.png" />
+            <Avatar style={{ objectFit: "cover" }} src="/noimg.png" />
             <form onSubmit={handleSubmit(onClickEditSubmit)}>
               <Row>
                 <MainWrapper>
@@ -412,7 +412,7 @@ export default function ProductCommentListUIItem(props: ICommentListUIProps) {
                             수정완료
                           </EditButton>
                           <DeleteIcon
-                            src="/엑스.png/"
+                            src="/nono.png/"
                             onClick={onClickEditClose}
                           />
                         </>
@@ -422,7 +422,7 @@ export default function ProductCommentListUIItem(props: ICommentListUIProps) {
                             수정
                           </EditOpenButton>
                           <DeleteIcon
-                            src="/엑스.png/"
+                            src="/nono.png/"
                             onClick={onClickOpenDeleteModal}
                           />
                         </>

@@ -34,7 +34,7 @@ export default function ProductListUI(props: IProductListUI) {
                     />
                   ) : (
                     <S.CardImage
-                      src={"/사진없음.png"}
+                      src={"/noimg.png"}
                       style={{ objectFit: "cover" }}
                     />
                   )}

@@ -1,8 +1,7 @@
-import * as S from'./basketItem.styles'
+import * as S from "./basketItem.styles";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { IBasketItemProps } from "./basket.types";
-
 
 export default function BasketItemPage(props: IBasketItemProps) {
   const [check, setCheck] = useState(true);
@@ -41,7 +40,7 @@ export default function BasketItemPage(props: IBasketItemProps) {
               src={`https://storage.googleapis.com/${props.el.images[0]}`}
             />
           ) : (
-            <S.IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
+            <S.IMG style={{ objectFit: "cover" }} src={"/noimg.png"} />
           )}
         </S.ImgBody>
         <S.ProductCol onClick={onClickProduct}>

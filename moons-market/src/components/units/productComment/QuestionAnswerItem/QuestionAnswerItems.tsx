@@ -298,8 +298,8 @@ export default function QuestionAnswerItems(props: ICommentListUIProps) {
       )}
       {/* <ItemWrapper> */}
       <FlexWrapper>
-        <Avatar style={{ objectFit: "cover" }} src="/초록화살.png" />
-        <Avatar style={{ objectFit: "cover" }} src="/사진없음.png" />
+        <Avatar style={{ objectFit: "cover" }} src="/greenArrow.png" />
+        <Avatar style={{ objectFit: "cover" }} src="/noimg.png" />
         <form onSubmit={handleSubmit(onClickEditSubmit)}>
           <Row>
             <MainWrapper>
@@ -326,7 +326,7 @@ export default function QuestionAnswerItems(props: ICommentListUIProps) {
                       <EditButton isActive={formState.isValid}>
                         수정완료
                       </EditButton>
-                      <DeleteIcon src="/엑스.png/" onClick={onClickEditClose} />
+                      <DeleteIcon src="/nono.png/" onClick={onClickEditClose} />
                     </>
                   ) : (
                     <>
@@ -334,7 +334,7 @@ export default function QuestionAnswerItems(props: ICommentListUIProps) {
                         수정
                       </EditOpenButton>
                       <DeleteIcon
-                        src="/엑스.png/"
+                        src="/nono.png/"
                         onClick={onClickOpenDeleteModal}
                       />
                     </>

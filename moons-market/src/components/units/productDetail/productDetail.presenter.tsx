@@ -19,7 +19,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
             <Button type="primary" onClick={props.BasketCancle}>
               더 볼게요
             </Button>
-          </>
+          </>,
         ]}
       >
         <p>장바구니에 담겼습니다! 장바구니로 이동하시겠습니까?</p>
@@ -35,7 +35,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
             <Button type="primary" onClick={props.DeleteCancle}>
               안지울래요~
             </Button>
-          </>
+          </>,
         ]}
       >
         <p>장바구니에 담겼습니다! 장바구니로 이동하시겠습니까?</p>
@@ -50,7 +50,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
                   src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
                 />
               ) : (
-                <S.IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
+                <S.IMG style={{ objectFit: "cover" }} src={"/noimg.png"} />
               )}
             </S.LeftBody>{" "}
             <S.TagBox>
@@ -122,8 +122,11 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
           <S.ImageBox>
             {props.data?.fetchUseditem.images
               ?.filter((aa: any) => aa)
-              .map((aa: any,idx) => (
-                <S.IMG key={uuid()} src={`https://storage.googleapis.com/${aa}`} />
+              .map((aa: any, idx) => (
+                <S.IMG
+                  key={uuid()}
+                  src={`https://storage.googleapis.com/${aa}`}
+                />
               ))}
           </S.ImageBox>
           {typeof window !== "undefined" ? (
@@ -145,7 +148,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
                   height: "400px",
                   marginTop: "20px",
                   borderRadius: "15px",
-                  marginLeft: "30px"
+                  marginLeft: "30px",
                 }}
               ></div>
             </>

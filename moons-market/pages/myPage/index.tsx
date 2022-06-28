@@ -31,7 +31,7 @@ export const ProfileBack = styled.div`
   margin-left: 200px;
   height: 300px;
   width: 300px;
-  background-image: url("/동글.png");
+  background-image: url("/circle.png");
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ export const ProfileImageBox = styled.div`
   height: 200px;
   width: 200px;
   border-radius: 150px;
-  background-image: url("/사진없음.png");
+  background-image: url("/noimg.png");
   background-size: cover;
 `;
 export const ProfileImage = styled.img`

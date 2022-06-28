@@ -66,7 +66,7 @@ export const ProFilePhoto = styled.div`
   height: 30px;
   margin-right: 20px;
   line-height: 80px;
-  background-image: url("/프로필.png");
+  background-image: url("/profile.png");
   background-size: cover;
 `;
 export const NameDate = styled.div`
@@ -189,7 +189,7 @@ export const ProductDetailBox = styled.div`
 `;
 
 export const NoHeartIcon = styled.div`
-  background-image: url("/빈하트.png");
+  background-image: url("/whiteheart.png");
   margin-left: 30px;
   height: 60px;
   width: 60px;
@@ -216,7 +216,7 @@ export const HeartIcon = styled.div`
   font-size: 20px;
   color: black;
   :hover {
-    background-image: url("/빈하트.png");
+    background-image: url("/whiteheart.png");
   }
   cursor: pointer;
 `;

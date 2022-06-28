@@ -88,7 +88,7 @@ export const Name = styled.div`
 
 // ignore prettier
 export const NoHeartIcon = styled.div`
-  background-image: url("/빈하트.png");
+  background-image: url("/whiteheart.png");
   margin-left: 30px;
   height: 60px;
   width: 60px;
@@ -99,12 +99,12 @@ export const NoHeartIcon = styled.div`
   font-size: 20px;
   color: black;
   :hover {
-    background-image: url("/빈하트.png");
+    background-image: url("/whiteheart.png");
   }
   cursor: pointer;
 `;
 export const HeartIcon = styled.div`
-  background-image: url("/하트.png");
+  background-image: url("/heart.png");
   margin-left: 30px;
   height: 60px;
   width: 60px;
@@ -115,7 +115,7 @@ export const HeartIcon = styled.div`
   font-size: 20px;
   color: black;
   :hover {
-    background-image: url("/하트.png");
+    background-image: url("/heart.png");
   }
   cursor: pointer;
 `;
@@ -155,7 +155,7 @@ export default function ZzimItemPage(props: IZzimItemProps) {
               src={`https://storage.googleapis.com/${props.el.images[0]}`}
             />
           ) : (
-            <IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
+            <IMG style={{ objectFit: "cover" }} src={"/noimg.png"} />
           )}
         </ImgBody>
         <ProductCol onClick={onClickProduct}>

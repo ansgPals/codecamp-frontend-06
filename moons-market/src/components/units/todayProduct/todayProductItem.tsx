@@ -61,7 +61,7 @@ export default function TodayProductItemPage(props: ITodayItemProps) {
               src={`https://storage.googleapis.com/${props.el.images[0]}`}
             />
           ) : (
-            <IMG style={{ objectFit: "cover" }} src={"/사진없음.png"} />
+            <IMG style={{ objectFit: "cover" }} src={"/noimg.png"} />
           )}
         </ImgBody>
 
