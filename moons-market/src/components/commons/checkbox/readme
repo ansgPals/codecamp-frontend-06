@@ -1,0 +1,47 @@
+import { useState } from "react";
+import CheckBoxComponent from "../../src/components/commons/checkbox/check-box";
+
+export default function TestPage() {
+const myArr = [1, 2, 3, 4, 5, 6, 7];
+const stateArr = new Array(myArr.length).fill(true);
+
+console.log("ddd", stateArr);
+
+const [check, setCheck] = useState(stateArr);
+
+const onClickCheck = (i) => () => {
+const myCheck = [...check];
+myCheck[i] = !myCheck[i];
+setCheck([...myCheck]);
+};
+return (
+<div>
+{myArr.map((el, i) => (
+<div key={i}>
+<ToggleComponent
+            onClickEvent={onClickCheck(i)}
+            checked={check[i]}
+          />
+{el}
+</div>
+))}
+</div>
+);
+}
+----- 단일 사용시
+import { useState } from "react";
+import ToggleComponent from "../../src/components/commons/toggle/toggle";
+
+export default function TestPage() {
+const [check, setCheck] = useState(true);
+const onClickCheck = () => {
+setCheck((prev) => !prev);
+};
+return (
+<div>
+<ToggleComponent onClickEvent={onClickCheck} check={check} />
+</div>
+);
+}
+
+맵 돌릴때 위와 같이 돌리시면 됩니다

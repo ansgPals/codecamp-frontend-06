@@ -1,0 +1,12 @@
+export default function TogglePAge(){
+  const [toggle, setToggle] = useState(true);
+  const onClickToggle = () => {
+    setToggle((prev) => !prev);
+  };
+
+    return(
+                        <div onClick={onClickToggle}>
+                  <Toggle toggle={toggle}></Toggle>
+                </div>
+    )
+}

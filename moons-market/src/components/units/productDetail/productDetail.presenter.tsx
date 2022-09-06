@@ -38,7 +38,7 @@ export default function ProductDetailUI(props: IProductDeatilUIProps) {
           </>,
         ]}
       >
-        <p>장바구니에 담겼습니다! 장바구니로 이동하시겠습니까?</p>
+        <p>정말로 상품을 삭제하시겠습니까??</p>
       </Modal>
       <S.Back>
         <S.BackGround>

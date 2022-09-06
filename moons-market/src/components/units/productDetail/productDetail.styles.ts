@@ -200,12 +200,12 @@ export const NoHeartIcon = styled.div`
   font-size: 20px;
   color: black;
   :hover {
-    background-image: url("/하트.png");
+    background-image: url("/heart.png");
   }
   cursor: pointer;
 `;
 export const HeartIcon = styled.div`
-  background-image: url("/하트.png");
+  background-image: url("/heart.png");
   margin-left: 30px;
   height: 60px;
   width: 60px;

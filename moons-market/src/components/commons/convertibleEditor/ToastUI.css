@@ -1,0 +1,24 @@
+.toastui-editor-defaultUI {
+  border: none !important;
+  border-radius: 0 !important;
+}
+.toastui-editor-contents p {
+  font-size: 1.2rem;
+
+  line-height: 1.46rem;
+  margin: 0 !important;
+}
+.toastui-editor-contents span {
+  font-size: 1.2rem;
+  line-height: 1.46rem;
+  margin: 0 !important;
+}
+.toastui-editor-contents strong {
+  font-size: 1.2rem;
+  line-height: 1.46rem;
+  margin: 0 !important;
+  font-family: "SUIT700" !important;
+}
+.ProseMirror div {
+  font-size: 1.2rem;
+}

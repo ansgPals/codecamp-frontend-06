@@ -1,0 +1,15 @@
+import PagiNationComponent from "../../src/components/commons/pagination/pagination.container";
+
+export default function PaginationTestPage() {
+  return       <PagiNationUserComponent
+        dataCount={500}
+        numberOfPageData={10}
+        refetch={refetch}
+        paginationState={paginationState}
+      />
+}
+
+  // dataCount 총 데이터 수
+  // refetch 기능
+  // numberOfPageData 한페이지당 데이터의 수 
+  // paginationState 데이터변경 유무를 받는 값입니다.(search 기능을 사용한다면 필수로 넣어주세요)

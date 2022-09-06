@@ -1,0 +1,21 @@
+import ProfileCardComponent from "../../src/components/commons/profile-card/profile-card.container";
+
+export default function TestPage() {
+ 
+
+  return <ProfileCardComponent userData={userData} />;
+}
+userDataType = {
+    id: string;
+    blog?: string;
+    description?: string;
+    facebook?: string;
+    gitHub?: string;
+    instagram?: string;
+    level: string;
+    name: string;
+    nickName: string;
+    phone?: string;
+    url?: string;
+    userId: string;
+  };
